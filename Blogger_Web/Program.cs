@@ -21,6 +21,7 @@ builder.Services.AddDbContext<BloggerDbContext>(options =>
 
 // Register Controller
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 var app = builder.Build();
 
