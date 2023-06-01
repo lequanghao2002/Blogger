@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger_Data", "Blogger_Data\Blogger_Data.csproj", "{5A2F5591-1860-471E-BF47-8407DB45C4CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger_Data", "Blogger_Data\Blogger_Data.csproj", "{5A2F5591-1860-471E-BF47-8407DB45C4CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger_Model", "Blogger_Model\Blogger_Model.csproj", "{EE890F9E-8874-40CF-B4F6-7DE99497DFA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger_Model", "Blogger_Model\Blogger_Model.csproj", "{EE890F9E-8874-40CF-B4F6-7DE99497DFA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger_Common", "Blogger_Common\Blogger_Common.csproj", "{44A37703-5DB8-430F-9ECA-C10E7A507AD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger_Common", "Blogger_Common\Blogger_Common.csproj", "{44A37703-5DB8-430F-9ECA-C10E7A507AD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger_Web", "Blogger_Web\Blogger_Web.csproj", "{B15480C5-EE1D-48BC-AB4D-A807A2E93A93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger_Web", "Blogger_Web\Blogger_Web.csproj", "{B15480C5-EE1D-48BC-AB4D-A807A2E93A93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

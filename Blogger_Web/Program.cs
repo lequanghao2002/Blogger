@@ -1,4 +1,3 @@
-
 using Blogger_Data;
 using Blogger_Web.Respositories;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +21,7 @@ builder.Services.AddDbContext<BloggerDbContext>(options =>
 // Register Controller
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 
 var app = builder.Build();
 

@@ -33,7 +33,6 @@ namespace Blogger_Model
         public int AccountID { get; set; }
         [ForeignKey("AccountID")]
         public Account Account { get; set; }
-
         public IEnumerable<Post_Category> Post_Categories { get; set; }
     }
 }
