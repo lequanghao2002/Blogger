@@ -15,7 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="App\Components\" />
+    <Folder Include="App\Shared\" />
+    <Folder Include="Assets\Admin\" />
+    <Folder Include="Assets\Client\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Libs\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
 
   <ItemGroup>

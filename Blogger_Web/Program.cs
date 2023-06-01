@@ -1,5 +1,6 @@
 
 using Blogger_Data;
+using Blogger_Web.Respositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -17,6 +18,9 @@ builder.Services.AddDbContext<BloggerDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// Register Controller
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
