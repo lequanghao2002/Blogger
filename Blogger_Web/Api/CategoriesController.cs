@@ -21,7 +21,7 @@ namespace Blogger_Web.Api
             try
             {
                 var listCategories = await _categoryRepository.GetAll();
-                return BadRequest(listCategories);
+                return Ok(listCategories);
             }
             catch
             {

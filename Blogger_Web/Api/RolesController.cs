@@ -21,7 +21,7 @@ namespace Blogger_Web.Api
             try
             {
                 var listRoles = await _roleRepository.GetAll();
-                return BadRequest(listRoles);
+                return Ok(listRoles);
             }
             catch
             {
