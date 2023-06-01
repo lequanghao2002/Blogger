@@ -4,6 +4,7 @@ using Blogger_Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blogger_Data.Migrations
 {
     [DbContext(typeof(BloggerDbContext))]
-    partial class BloggerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230601040034_AddTableAccountRole")]
+    partial class AddTableAccountRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace Blogger_Data.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("RoleID")
                         .HasColumnType("int");
@@ -49,7 +51,7 @@ namespace Blogger_Data.Migrations
 
                     b.HasIndex("RoleID");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("Blogger_Model.Category", b =>
@@ -143,7 +145,7 @@ namespace Blogger_Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("Blogger_Model.Account", b =>

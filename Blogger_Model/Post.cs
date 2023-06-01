@@ -27,11 +27,12 @@ namespace Blogger_Model
 
         [Required, StringLength(256)]
         public string Image { get; set; }
-
         public bool Published { get; set; }
         public DateTime CreateDate { get; set; }
-        public string CreateBy { get; set; }
         public DateTime UpdateDate { get; set; }
+        public int AccountID { get; set; }
+        [ForeignKey("AccountID")]
+        public Account Account { get; set; }
 
         public IEnumerable<Post_Category> Post_Categories { get; set; }
     }

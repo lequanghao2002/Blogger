@@ -21,5 +21,3 @@ namespace Blogger_Model
 
     }
 }
-
-// Add-Migration AddDbInitial -StartupProject Blogger_Web
