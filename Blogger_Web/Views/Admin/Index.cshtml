@@ -14,7 +14,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Assets/Admin/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" ng-app="Blogger">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -22,7 +22,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="../../index3.html" class="nav-link">Home</a>
@@ -181,14 +181,21 @@
                              with font-awesome or any other icon font library -->
                         <li class="nav-header">EXAMPLES</li>
                         <li class="nav-item">
-                            <a href="../gallery.html" class="nav-link">
+                            <a ui-sref="category_list" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
-                                    Gallery
+                                    Category List
                                 </p>
                             </a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a ui-sref="category_add" class="nav-link">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    Category Add
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -198,7 +205,8 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            
+            @*Directive của ui-router, hiển thị tất cả view con*@
+            <div ui-view></div>
         </div>
         <!-- /.content-wrapper -->
 
@@ -222,14 +230,31 @@
     <script src="~/Assets/Admin/js/adminlte.min.js"></script>
 
     <!-- AdminLTE for demo purposes -->
-    <script src="~/Assets/Admin/js/demo.js"></script>
+    @*<script src="~/Assets/Admin/js/demo.js"></script>*@
 
     <!------------------------------ Begin embed Angularjs ------------------------------>
 
     <!-- Angular JS -->
-    <script src="~/assets/admin/libs/angular-1.8.2/angular.js"></script>
+    <script src="~/Assets/Admin/libs/angular-1.8.2/angular.js"></script>
 
     <!-- UI Router -->
-    <script src="~/assets/admin/libs/ui-router/scripts/npm_angular_ui_router_release.js"></script>
+    <script src="~/Assets/Admin/libs/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- Module Common -->
+    <script src="~/App/Shared/Modules/bloggerCommon.js"></script>
+
+    <!-- Module Components -->
+    <script src="~/App/Components/Categories/categoryModule.js"></script>
+
+    <!-- Module Main -->
+    <script src="~/App/app.js"></script>
+
+    <!-- Controller -->
+    <script src="~/App/Components/home/homecontroller.js"></script>
+
+    <script src="~/App/Components/Categories/categoryListController.js"></script>
+    <script src="~/App/Components/Categories/categoryAddController.js"></script>
+    <script src="~/App/Components/Categories/categoryEditController.js"></script>
+
 </body>
 </html>
