@@ -17,11 +17,10 @@
   <ItemGroup>
     <Folder Include="App\Components\Accounts\" />
     <Folder Include="App\Components\Roles\" />
-    <Folder Include="App\Components\Posts\" />
     <Folder Include="App\Shared\Footer\" />
     <Folder Include="App\Shared\Navigation\" />
-    <Folder Include="App\Shared\Directives\" />
     <Folder Include="App\Shared\Modules\" />
+    <Folder Include="App\Shared\Filter\" />
     <Folder Include="App\Shared\Services\" />
     <Folder Include="Assets\Admin\libs\angular-1.8.2\i18n\ngLocale\" />
     <Folder Include="Assets\Client\" />

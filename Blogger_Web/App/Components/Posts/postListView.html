@@ -1,0 +1,59 @@
+﻿<div class="card">
+    <div class="card-header">
+        <h3 class="card-title" style="font-size:20px">List Post</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th style="width: 5%">ID</th>
+                    <th style="width: 40%">Title</th>
+                    <th style="width: 15%">Category</th>
+                    <th style="width: 10%">Create Date</th>
+                    <th style="width: 12%">Account Name</th>
+                    <th style="width: 3%">Published</th>
+                    <th style="width: 15%">Action</th>
+                    <!--<th style="width: 30%">Biref Content</th>-->
+                    <!--<th style="width: 50%">Content</th>-->
+                    <!--<th style="width: 20%">Image</th>-->
+                    <!--<th style="width: 10%">Update Date</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="post in listPosts">
+                    <td>{{post.id}}</td>
+                    <td>{{post.title}}</td>
+                    <td>
+                        <span class="badge badge-pill bg-gradient-dark mr-1" style="font-size: 14px" ng-repeat="category in post.listCategoriesName">{{category}}</span>
+                    </td>
+                    <td>{{post.createDate | date : 'dd/MM/yyyy'}}</td>
+                    <td>{{post.accountName}}</td>
+                    <td>
+                        <span ng-class="{'badge bg-gradient-green': post.published == true, 'badge bg-gradient-red': post.published == false}" style="font-size: 14px">{{post.published | statusFilter}}</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">
+                            <i class="fa fa-pen"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <button class="btn btn-sm btn-info">
+                            <i class="fa fa-info-circle"></i>
+                        </button>
+                    </td>
+
+                    <!--<td>{{post.briefContent}}</td>-->
+                    <!--<td>{{post.content}}</td>-->
+                    <!--<td>{{post.image}}</td>-->
+                    <!--<td>{{post.updateDate | date : 'dd/MM/yyyy'}}</td>-->
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <pagination-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getListPosts(page)"></pagination-directive>
+</div>

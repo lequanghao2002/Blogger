@@ -3,8 +3,9 @@
 (function () {
     angular.module('Blogger',
         [
+            'BloggerCommon',
             'BloggerCategory',
-            'BloggerCommon'
+            'BloggerPost'
         ]).config(config);
 
     // Hai inject này nằm trong ui-router

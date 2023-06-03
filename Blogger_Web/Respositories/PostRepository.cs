@@ -1,5 +1,6 @@
 ﻿using Blogger_Data;
 using Blogger_Model;
+using Blogger_Web.Infrastructure.Core;
 using Blogger_Web.Models.PostsDTO;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace Blogger_Web.Respositories
 {
     public interface IPostRepository
     {
-        public Task<List<GetPostDTO>> GetAll();
+        public Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize);
         public Task<CreatePostDTO> Create(CreatePostDTO createPostDTO);
         public Task<CreatePostDTO> Update(CreatePostDTO createPostDTO, int id);
         public Task<Post> Delete(int id);
@@ -20,7 +21,7 @@ namespace Blogger_Web.Respositories
 		{
 			_bloggerDbContext = bloggerDbContext;
 		}
-		public async Task<List<GetPostDTO>> GetAll()
+		public async Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize)
 		{
 			var listPostDomain = await _bloggerDbContext.Posts.Select(post => new GetPostDTO
 			{
@@ -34,9 +35,20 @@ namespace Blogger_Web.Respositories
 				UpdateDate = post.UpdateDate,
 				AccountName = post.Account.FullName,
 				ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
-			}).ToListAsync();
+			}).OrderByDescending(post => post.CreateDate).ToListAsync();
 
-			return listPostDomain;
+			var totalCount = listPostDomain.Count();
+			var listPostPagination = listPostDomain.Skip((page) * pageSize).Take(pageSize);
+
+            PaginationSet<GetPostDTO> paginationSet = new PaginationSet<GetPostDTO>()
+			{
+				List = listPostPagination,
+				Page = page,
+				TotalCount = totalCount,
+				TotalPages = (int)Math.Ceiling((decimal)totalCount / pageSize)
+            };
+
+            return paginationSet;
 		}
 		public async Task<CreatePostDTO> Create(CreatePostDTO createPostDTO)
 		{

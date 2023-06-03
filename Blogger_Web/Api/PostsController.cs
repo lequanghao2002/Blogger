@@ -17,12 +17,12 @@ namespace Blogger_Web.Api
 		}
 
 		[HttpGet("get-list-posts")]
-		public async Task<IActionResult> GetListPosts()
+		public async Task<IActionResult> GetListPosts(int page = 1, int pageSize = 8)
 		{
 			try
 			{
-				var listPosts = await _postRepository.GetAll();
-				return Ok(listPosts);
+				var listPostsPagination = await _postRepository.GetAll(page, pageSize);
+				return Ok(listPostsPagination);
 			}
 			catch
 			{

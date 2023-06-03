@@ -184,15 +184,15 @@
                             <a ui-sref="category_list" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
-                                    Category List
+                                    Category
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a ui-sref="category_add" class="nav-link">
+                            <a ui-sref="post_list" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
-                                    Category Add
+                                    Post
                                 </p>
                             </a>
                         </li>
@@ -205,21 +205,28 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            @*Directive của ui-router, hiển thị tất cả view con*@
-            <div ui-view></div>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 mt-4">
+                            @*Directive của ui-router, hiển thị tất cả view con*@
+                            <div ui-view></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
+
         <!-- /.content-wrapper -->
 
-        <footer class="main-footer">
+        @*<footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.2.0
             </div>
             <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
-
+        </footer>*@
     </div>
     <!-- ./wrapper -->
-
     <!-- jQuery -->
     <script src="~/Assets/Admin/libs/jquery/jquery.min.js"></script>
 
@@ -233,7 +240,6 @@
     @*<script src="~/Assets/Admin/js/demo.js"></script>*@
 
     <!------------------------------ Begin embed Angularjs ------------------------------>
-
     <!-- Angular JS -->
     <script src="~/Assets/Admin/libs/angular-1.8.2/angular.js"></script>
 
@@ -242,9 +248,19 @@
 
     <!-- Module Common -->
     <script src="~/App/Shared/Modules/bloggerCommon.js"></script>
+    <script src="~/app/shared/services/apiService.js"></script>
+    <script src="~/app/shared/filter/pulishedFilter.js"></script>
+    <script src="~/app/shared/directives/paginationDirective.js"></script>
+
+    
+
 
     <!-- Module Components -->
     <script src="~/App/Components/Categories/categoryModule.js"></script>
+    <script src="~/app/components/posts/postmodule.js"></script>
+
+
+
 
     <!-- Module Main -->
     <script src="~/App/app.js"></script>
@@ -255,6 +271,14 @@
     <script src="~/App/Components/Categories/categoryListController.js"></script>
     <script src="~/App/Components/Categories/categoryAddController.js"></script>
     <script src="~/App/Components/Categories/categoryEditController.js"></script>
+
+    <script src="~/app/components/posts/postlistcontroller.js"></script>
+    <script src="~/app/components/posts/postaddcontroller.js"></script>
+    <script src="~/app/components/posts/posteditcontroller.js"></script>
+
+
+
+
 
 </body>
 </html>
