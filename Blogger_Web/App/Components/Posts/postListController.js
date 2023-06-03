@@ -9,7 +9,10 @@
         $scope.listPosts = [];
 
         $scope.page = 0;
+        $scope.pageSize = 6;
         $scope.pagesCount = 0;
+        $scope.totalCount = 0;
+        $scope.num = 0;
 
         $scope.getListPosts = getListPosts;
         function getListPosts(page) {
@@ -17,7 +20,7 @@
             var config = {
                 params: {
                     page: page,
-                    pageSize: 2
+                    pageSize: 6
                 }
             };
 
@@ -25,8 +28,19 @@
                 $scope.listPosts = result.data.list;
 
                 $scope.page = result.data.page;
-                $scope.pagesCount = result.data.totalPages;
-                $scope.totalCount = result.data.totalCounts;
+                $scope.num = result.data.count;
+                $scope.pagesCount = result.data.pagesCount;
+                $scope.totalCount = result.data.totalCount;
+
+                $scope.showTo = ($scope.page * $scope.pageSize + 1);
+                $scope.showFrom = ($scope.page * $scope.pageSize) + $scope.num;
+
+                if ($scope.showFrom % $scope.pageSize == 1) {
+                    $scope.showEnd = true;
+                }
+                else {
+                    $scope.showEnd = false;
+                }
 
             }, () => {
                 alert('Get list posts failed');

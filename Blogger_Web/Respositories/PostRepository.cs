@@ -45,7 +45,7 @@ namespace Blogger_Web.Respositories
 				List = listPostPagination,
 				Page = page,
 				TotalCount = totalCount,
-				TotalPages = (int)Math.Ceiling((decimal)totalCount / pageSize)
+                PagesCount = (int)Math.Ceiling((decimal)totalCount / pageSize)
             };
 
             return paginationSet;

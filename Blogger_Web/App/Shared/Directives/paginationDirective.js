@@ -7,10 +7,16 @@
         return {
             scope: {
                 page: '@',
+                showTo: '@',
+                showFrom: '@',
+                showEnd: '@',
+                page: '@',
+                num: '@',
+                pageSize: '@',
                 pagesCount: '@',
                 totalCount: '@',
                 searchFunc: '&',
-                customPath: '@'
+                customPath: '@',
             },
             replace: true,
             restrict: 'E',

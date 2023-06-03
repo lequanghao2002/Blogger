@@ -17,6 +17,16 @@
             <li class="page-item">
                 <a class="page-link" ng-hide="page == pagesCount - 1" ng-click="search(pagesCount - 1)" style="color: #343a40 !important"> >> </a>
             </li>
+
         </ul>
     </div>
+
+    <div ng-if="showEnd == 'true'">
+        Showing {{totalCount}} of {{totalCount}} record
+    </div>
+    <div ng-if="showEnd == 'false'">
+        Showing {{showTo}} to {{showFrom}} of {{totalCount}} record
+    </div>
+    
 </div>
+

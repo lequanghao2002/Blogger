@@ -11,7 +11,7 @@
         }
 
         // Lưu tổng số trang
-        public int TotalPages { get; set; }
+        public int PagesCount { get; set; }
 
         // Lưu tổng số bản ghi
         public int TotalCount { get; set; }
