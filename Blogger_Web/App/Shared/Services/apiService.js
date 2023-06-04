@@ -3,11 +3,12 @@
 (function (app) {
     app.service('apiService', apiService);
 
-    apiService.$inject = ['$http'];
+    apiService.$inject = ['$http', 'notificationService'];
 
-    function apiService($http) {
+    function apiService($http, notificationService) {
         return {
-            get: get
+            get: get,
+            post: post
         }
 
         function get(url, params, success, failed) {
@@ -15,6 +16,19 @@
                 success(result);
             }, (error) => {
                 failed(error);
+            });
+        }
+
+        function post(url, data, success, failed) {
+            $http.post(url, data).then((result) => {
+                success(result);
+            }, (error) => {
+                if (error == '401') {
+                    notificationService.displayError('authentication failure');
+                }
+                else if (failed != null) {
+                    failed(error);
+                }
             });
         }
 
