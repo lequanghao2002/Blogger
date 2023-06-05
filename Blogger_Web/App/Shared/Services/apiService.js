@@ -8,7 +8,8 @@
     function apiService($http, notificationService) {
         return {
             get: get,
-            post: post
+            post: post,
+            put: put
         }
 
         function get(url, params, success, failed) {
@@ -21,6 +22,19 @@
 
         function post(url, data, success, failed) {
             $http.post(url, data).then((result) => {
+                success(result);
+            }, (error) => {
+                if (error == '401') {
+                    notificationService.displayError('authentication failure');
+                }
+                else if (failed != null) {
+                    failed(error);
+                }
+            });
+        }
+
+        function put(url, data, success, failed) {
+            $http.put(url, data).then((result) => {
                 success(result);
             }, (error) => {
                 if (error == '401') {
