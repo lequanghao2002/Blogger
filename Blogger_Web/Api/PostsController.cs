@@ -30,7 +30,28 @@ namespace Blogger_Web.Api
 			}
 		}
 
-		[HttpPost("create-post")]
+        [HttpGet("get-post-by-id/{id}")]
+        public async Task<IActionResult> GetPostById(int id)
+        {
+            try
+            {
+                var post = await _postRepository.GetById(id);
+				if(post != null)
+				{
+					return Ok(post);
+				}
+				else
+				{
+                    return BadRequest($"Không tìm thấy post có id = {id}");
+                }
+            }
+            catch
+            {
+                return BadRequest("Lấy post theo id không thành công");
+            }
+        }
+
+        [HttpPost("create-post")]
 		public async Task<IActionResult> CreatePost(CreatePostDTO createPostDTO)
 		{
 			try
@@ -53,7 +74,7 @@ namespace Blogger_Web.Api
 		}
 
 		[HttpPut("update-post/{id}")]
-		public async Task<IActionResult> UpdatePost(CreatePostDTO createPostDTO, int id)
+		public async Task<IActionResult> UpdatePost(int id, CreatePostDTO createPostDTO)
 		{
 			try
 			{
