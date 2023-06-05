@@ -9,7 +9,8 @@
         return {
             get: get,
             post: post,
-            put: put
+            put: put,
+            delete: del
         }
 
         function get(url, params, success, failed) {
@@ -35,6 +36,19 @@
 
         function put(url, data, success, failed) {
             $http.put(url, data).then((result) => {
+                success(result);
+            }, (error) => {
+                if (error == '401') {
+                    notificationService.displayError('authentication failure');
+                }
+                else if (failed != null) {
+                    failed(error);
+                }
+            });
+        }
+
+        function del(url, data, success, failed) {
+            $http.delete(url, data).then((result) => {
                 success(result);
             }, (error) => {
                 if (error == '401') {
