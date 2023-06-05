@@ -1,6 +1,7 @@
 ﻿using Blogger_Data;
 using Blogger_Model;
 using Blogger_Web.Models.Categories;
+using Blogger_Web.Models.CategoriesDTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blogger_Web.Respositories
@@ -8,6 +9,7 @@ namespace Blogger_Web.Respositories
     public interface ICategoryRepository
     {
         public Task<List<GetCategoryDTO>> GetAll();
+        public Task<GetCategoryByIdDTO> GetById(int id);
         public Task<CreateCategoryDTO> Create(CreateCategoryDTO createCategoryDTO);
         public Task<CreateCategoryDTO> Update(CreateCategoryDTO createCategoryDTO, int id);
         public Task<Category> Delete(int id);
@@ -29,6 +31,17 @@ namespace Blogger_Web.Respositories
             }).ToListAsync();
 
             return listCategoriesDomain;
+        }
+
+        public async Task<GetCategoryByIdDTO> GetById(int id)
+        {
+            var categoryDomainById = await _bloggerDbContext.Categories.Select(category => new GetCategoryByIdDTO
+            {
+                ID = category.ID,
+                Name = category.Name
+            }).FirstOrDefaultAsync(category => category.ID == id);
+
+            return categoryDomainById;
         }
 
         public async Task<CreateCategoryDTO> Create(CreateCategoryDTO createCategoryDTO)

@@ -29,6 +29,20 @@ namespace Blogger_Web.Api
             }
         }
 
+        [HttpGet("get-category-by-id/{id}")]
+        public async Task<IActionResult> GetCategoryById(int id)
+        {
+            try
+            {
+                var categoryById = await _categoryRepository.GetById(id);
+                return Ok(categoryById);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("create-category")]
         public async Task<IActionResult> CreateCategory(CreateCategoryDTO createCategoryDTO)
         {
