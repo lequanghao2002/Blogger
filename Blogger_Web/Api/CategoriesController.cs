@@ -49,7 +49,14 @@ namespace Blogger_Web.Api
             try
             {
                 var categoryById = await _categoryRepository.GetById(id);
-                return Ok(categoryById);
+                if (categoryById != null)
+                {
+                    return Ok(categoryById);
+                }
+                else
+                {
+                    return BadRequest($"Không tìm thấy category có id = {id}");
+                }
             }
             catch
             {

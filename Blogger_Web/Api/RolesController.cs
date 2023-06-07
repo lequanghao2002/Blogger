@@ -1,4 +1,5 @@
-﻿using Blogger_Web.Models.RolesDTO;
+﻿using Blogger_Model;
+using Blogger_Web.Models.RolesDTO;
 using Blogger_Web.Respositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +17,33 @@ namespace Blogger_Web.Api
         }
 
         [HttpGet("get-list-roles")]
-        public async Task<IActionResult> GetListRoles()
+        public async Task<IActionResult> GetListRoles(int page = 0, int pageSize = 6)
         {
             try
             {
-                var listRoles = await _roleRepository.GetAll();
+                var listRoles = await _roleRepository.GetAll(page, pageSize);
                 return Ok(listRoles);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("get-role-by-id/{id}")]
+        public async Task<IActionResult> GetRoleById(int id)
+        {
+            try
+            {
+                var roleById = await _roleRepository.GetById(id);
+                if (roleById != null)
+                {
+                    return Ok(roleById);
+                }
+                else
+                {
+                    return BadRequest($"Không tìm thấy role có id = {id}");
+                }
             }
             catch
             {
