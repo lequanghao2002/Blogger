@@ -30,7 +30,7 @@ namespace Blogger_Web.Controllers
         // Url để client-side kết nối đến backend
         // /el-finder-file-system/connector
         [Route("/file-manager-connector")]
-        [HttpGet]
+        [HttpGet, HttpPost]
         public async Task<IActionResult> Connector()
         {
             var connector = GetConnector();

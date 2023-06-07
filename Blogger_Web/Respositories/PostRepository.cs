@@ -93,6 +93,12 @@ namespace Blogger_Web.Respositories
 
         public async Task<CreatePostDTO> Create(CreatePostDTO createPostDTO)
         {
+            // Kiểm tra ListCategoriesID có rỗng ko
+            if(createPostDTO.ListCategoriesID.Count() == 0)
+            {
+                return null!;
+            };
+
             //Kiểm tra xem id của Category nhập vào có tồn tại
             foreach (var idCategory in createPostDTO.ListCategoriesID)
             {
@@ -101,7 +107,7 @@ namespace Blogger_Web.Respositories
                 {
                     return null!;
                 }
-            }
+            };
 
             var createPostDomain = new Post()
             {
@@ -133,6 +139,12 @@ namespace Blogger_Web.Respositories
 
         public async Task<CreatePostDTO> Update(CreatePostDTO createPostDTO, int id)
         {
+            // Kiểm tra ListCategoriesID có rỗng ko
+            if (createPostDTO.ListCategoriesID.Count() == 0)
+            {
+                return null!;
+            };
+
             //Kiểm tra xem id của Category nhập vào có tồn tại
             foreach (var idCategory in createPostDTO.ListCategoriesID)
             {
