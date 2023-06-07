@@ -16,7 +16,21 @@ namespace Blogger_Web.Api
         }
 
         [HttpGet("get-list-categories")]
-        public async Task<IActionResult> GetListCategories()
+        public async Task<IActionResult> GetListCategories(int page = 0, int pageSize = 6)
+        {
+            try
+            {
+                var listCategories = await _categoryRepository.GetAll(page, pageSize);
+                return Ok(listCategories);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("get-all-categories")]
+        public async Task<IActionResult> GetAllCategories()
         {
             try
             {

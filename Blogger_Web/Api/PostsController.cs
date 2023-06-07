@@ -17,7 +17,7 @@ namespace Blogger_Web.Api
 		}
 
 		[HttpGet("get-list-posts")]
-		public async Task<IActionResult> GetListPosts(int page = 1, int pageSize = 8)
+		public async Task<IActionResult> GetListPosts(int page = 0, int pageSize = 6)
 		{
 			try
 			{
