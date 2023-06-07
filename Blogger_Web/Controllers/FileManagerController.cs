@@ -11,12 +11,14 @@ namespace Blogger_Web.Controllers
     public class FileManagerController : Controller
     {
         [Route("/file-manager-elfinder")]
+        [HttpGet]
         public IActionResult ElFinder()
         {
             return View();
         }
 
         [Route("/file-manager-ckeditor")]
+        [HttpGet]
         public IActionResult CkEditor()
         {
             return View();
@@ -28,6 +30,7 @@ namespace Blogger_Web.Controllers
         // Url để client-side kết nối đến backend
         // /el-finder-file-system/connector
         [Route("/file-manager-connector")]
+        [HttpGet]
         public async Task<IActionResult> Connector()
         {
             var connector = GetConnector();
@@ -37,6 +40,7 @@ namespace Blogger_Web.Controllers
         // Địa chỉ để truy vấn thumbnail
         // /el-finder-file-system/thumb
         [Route("/file-manager-thumb/{hash}")]
+        [HttpGet]
         public async Task<IActionResult> Thumbs(string hash)
         {
             var connector = GetConnector();
