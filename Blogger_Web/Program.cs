@@ -38,12 +38,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
            Path.Combine(builder.Environment.ContentRootPath, "Assets")),
     RequestPath = "/Assets"
-}) ;
+});
 
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -52,10 +53,18 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/App"
 });
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "UploadFiles")),
+    RequestPath = "/UploadFiles"
+});
+
+
 app.UseRouting();
 app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.UseAuthorization();
 
