@@ -41,7 +41,7 @@ namespace Blogger_Web.Respositories
             }).OrderByDescending(post => post.CreateDate).ToListAsync();
 
             var totalCount = listPostDomain.Count();
-            var listPostPagination = listPostDomain.Skip((page) * pageSize).Take(pageSize);
+            var listPostPagination = listPostDomain.Skip(page * pageSize).Take(pageSize);
 
             PaginationSet<GetPostDTO> paginationSet = new PaginationSet<GetPostDTO>()
             {
