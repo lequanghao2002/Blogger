@@ -1,5 +1,6 @@
 ﻿using Blogger_Data;
 using Blogger_Model;
+using Blogger_Web.Infrastructure.Core;
 using Blogger_Web.Models.Categories;
 using Blogger_Web.Models.CategoriesDTO;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace Blogger_Web.Respositories
 {
     public interface ICategoryRepository
     {
+        public Task<PaginationSet<GetCategoryDTO>> GetAll(int page, int pageSize);
         public Task<List<GetCategoryDTO>> GetAll();
         public Task<GetCategoryByIdDTO> GetById(int id);
         public Task<CreateCategoryDTO> Create(CreateCategoryDTO createCategoryDTO);
@@ -22,6 +24,29 @@ namespace Blogger_Web.Respositories
         {
             _bloggerDbContext = bloggerDbContext;
         }
+        public async Task<PaginationSet<GetCategoryDTO>> GetAll(int page, int pageSize)
+        {
+            var listCategoriesDomain = await _bloggerDbContext.Categories.Select(category => new GetCategoryDTO()
+            {
+                ID = category.ID,
+                Name = category.Name,
+            }).OrderByDescending(p => p.ID).ToListAsync();
+
+            var totalCount = listCategoriesDomain.Count();
+
+            var listCategoryPagination = listCategoriesDomain.Skip(page * pageSize).Take(pageSize);
+
+            var paginationSet = new PaginationSet<GetCategoryDTO>()
+            {
+                List = listCategoryPagination,
+                Page = page,
+                TotalCount = totalCount,
+                PagesCount = (int)Math.Ceiling((decimal)totalCount / pageSize)
+            };
+
+            return paginationSet;
+        }
+
         public async Task<List<GetCategoryDTO>> GetAll()
         {
             var listCategoriesDomain = await _bloggerDbContext.Categories.Select(category => new GetCategoryDTO()
