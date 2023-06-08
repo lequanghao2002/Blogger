@@ -13,6 +13,10 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Assets/Admin/css/adminlte.min.css">
+
+    <!-- Toast js -->
+    <link href="~/assets/admin/libs/toastr/build/toastr.css" rel="stylesheet" />
+
 </head>
 <body class="hold-transition sidebar-mini" ng-app="Blogger">
     <!-- Site wrapper -->
@@ -245,13 +249,28 @@
 
     <!-- UI Router -->
     <script src="~/Assets/Admin/libs/angular-ui-router/release/angular-ui-router.js"></script>
+    
+    <!-- Toast -->
+    <script src="~/assets/admin/libs/toastr/toastr.js"></script>
+
+    <!-- Bootbox -->
+    <script src="~/assets/admin/libs/bootbox/bootbox.js"></script>
+
+    <!-- ng - Bootbox -->
+    <script src="~/assets/admin/libs/ngbootbox/ngbootbox.js"></script>
+
+    <!-- CkEditor -->
+    <script src="~/assets/admin/libs/ckeditor4-releases/ckeditor.js"></script>
+
+    <!-- ng - CkEditor -->
+    <script src="~/assets/admin/libs/ng-ckeditor/ng-ckeditor.js"></script>
 
     <!-- Module Common -->
     <script src="~/App/Shared/Modules/bloggerCommon.js"></script>
     <script src="~/app/shared/services/apiService.js"></script>
+    <script src="~/app/shared/services/notificationService.js"></script>
     <script src="~/app/shared/filter/pulishedFilter.js"></script>
     <script src="~/app/shared/directives/paginationDirective.js"></script>
-
     
 
 
@@ -273,7 +292,7 @@
     <script src="~/App/Components/Categories/categoryEditController.js"></script>
 
     <script src="~/app/components/posts/postlistcontroller.js"></script>
-    <script src="~/app/components/posts/postaddcontroller.js"></script>
+    <script src="~/App/Components/Posts/postAddController.js"></script>
     <script src="~/app/components/posts/posteditcontroller.js"></script>
 
 
