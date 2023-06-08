@@ -1,0 +1,73 @@
+﻿<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title" style="font-size: 30px">Create Post</h3>
+    </div>
+
+    <form novalidate name="frmAddPost" role="form" ng-submit="addPost()">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" id="title" placeholder="Enter title" required ng-model="post.Title">
+                <span class="text-danger" ng-show="frmAddPost.title.$invalid">Please enter title</span>
+            </div>
+
+            <!--<div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" class="form-control" id="category" ng-model="post.ListCategoriesID" ng-options="option.id as option.name for option in ListCategoriesID">
+                </select>
+                <span class="text-danger" ng-show="frmAddPost.category.$invalid">Category cannot empty</span>
+                <input type="hidden" name="category" ng-model="post.ListCategoriesID">
+            </div>-->
+
+
+            <div class="form-group">
+                <label class="d-block">Category</label>
+                <div class="custom-control custom-checkbox d-inline mr-5" ng-repeat="category in ListCategories">
+                    <input type="checkbox" class="custom-control-input category_checkbox" name="category" required id="{{category.name}}" value="{{category.id}}">
+                    <label class="custom-control-label form-check-label" style="cursor: pointer" for="{{category.name}}">
+                        {{category.name}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="briefContent">Brief Content</label>
+                <textarea name="briefContent" class="form-control" id="briefContent" placeholder="Enter brief content" required ng-model="post.BriefContent"></textarea>
+                <span class="text-danger" ng-show="frmAddPost.briefContent.$invalid">Please enter brief content</span>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" class="form-control" id="content" placeholder="Enter content" required ckeditor="ckeditorContent" ng-model="post.Content"></textarea>
+                <span class="text-danger" ng-show="frmAddPost.content.$invalid">Please enter content</span>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image</label>
+                <div ng-show="post.image">
+                    <img src="{{post.image}}" class="w-25 h-25 d-block" />
+                </div>
+                <input type="text" name="image" class="form-control mt-1" id="image" required ng-model="post.image">
+                <button type="button" class="btn btn-default mt-1" ng-model="post.image" ng-click="chooseImage()">Choose Image</button>
+                <span class="text-danger d-block" ng-show="frmAddPost.image.$invalid">Please choose image</span>
+            </div>
+
+
+            <div class="form-group mb-0">
+                <div class="custom-control custom-checkbox" >
+                    <input type="checkbox" name="pulished" class="custom-control-input" id="pulished" ng-model="post.Published" ng-checked="post.Published">
+                    <label class="custom-control-label" style="cursor: pointer" for="pulished">Pulished</label>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button class="btn btn-success" ng-disabled="frmAddPost.$invalid">Create</button>
+
+            <button class="btn btn-default float-right" ui-sref="post_list">Cancel</button>
+
+        </div>
+    </form>
+</div>
+<!-- /.card -->

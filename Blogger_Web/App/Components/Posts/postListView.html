@@ -1,15 +1,46 @@
 ﻿<div class="card">
     <div class="card-header">
-        <h3 class="card-title" style="font-size:20px">List Post</h3>
+        <h3 class="card-title" style="font-size:30px">List Posts</h3>
+        
+        <button type="button" class="btn btn-success float-right" ui-sref="post_add" >Create</button>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <table class="table table-bordered text-center">
+        <div class="row">
+            <div class="col col-sm-5">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="">Date to and date from</span>
+                    </div>
+                    <input type="date" class="form-control">
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col col-sm-3">
+                <select name="category" class="form-control" id="category" ng-model="post.category" ng-options="option.id as option.name for option in listCategories">
+                    <option value="">
+                        All category
+                    </option>
+                </select>
+                <input type="hidden" name="category" ng-model="post.category">
+            </div>
+            <div class="col col-sm-4">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter title..." aria-label="Recipient's title" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <table class="table table-bordered table-striped text-center">
             <thead>
-                <tr>
+                <tr class="bg-gradient-dark">
                     <th style="width: 5%">ID</th>
-                    <th style="width: 40%">Title</th>
-                    <th style="width: 15%">Category</th>
+                    <th style="width: 45%">Title</th>
+                    <th style="width: 10%">Category</th>
                     <th style="width: 10%">Create Date</th>
                     <th style="width: 12%">Account Name</th>
                     <th style="width: 3%">Published</th>
@@ -23,9 +54,19 @@
             <tbody>
                 <tr ng-repeat="post in listPosts">
                     <td>{{post.id}}</td>
-                    <td>{{post.title}}</td>
+                    <td>{{post.title}}</td> 
                     <td>
-                        <span class="badge badge-pill bg-gradient-dark mr-1" style="font-size: 14px" ng-repeat="category in post.listCategoriesName">{{category}}</span>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-sm btn-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="opacity: 80%">
+                                Show <span class="badge badge-light">{{post.listCategoriesName.length}}</span>
+                                <span class="sr-only">unread messages</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <span class="dropdown-item border" ng-repeat="category in post.listCategoriesName">
+                                    {{category}}
+                                </span>
+                            </div>
+                        </div>
                     </td>
                     <td>{{post.createDate | date : 'dd/MM/yyyy'}}</td>
                     <td>{{post.accountName}}</td>
@@ -33,10 +74,10 @@
                         <span ng-class="{'badge bg-gradient-green': post.published == true, 'badge bg-gradient-red': post.published == false}" style="font-size: 14px">{{post.published | statusFilter}}</span>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-primary">
+                        <button class="btn btn-sm btn-primary" ui-sref="post_edit({id:post.id})">
                             <i class="fa fa-pen"></i>
                         </button>
-                        <button class="btn btn-sm btn-danger">
+                        <button class="btn btn-sm btn-danger" ng-click="deletePost(post.id)">
                             <i class="fa fa-trash"></i>
                         </button>
                         <button class="btn btn-sm btn-info">
@@ -57,3 +98,5 @@
     <!-- /.card-body -->
     <pagination-directive show-to="{{showTo}}" show-from="{{showFrom}}" show-end="{{showEnd}}" page="{{page}}" num="{{num}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getListPosts(page)"></pagination-directive>
 </div>
+
+

@@ -3,9 +3,9 @@
 (function (app) {
     app.controller('postListController', postListController);
 
-    postListController.$inject = ['$scope', 'apiService']
+    postListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox']
 
-    function postListController($scope, apiService) {
+    function postListController($scope, apiService, notificationService, $ngBootbox) {
         $scope.listPosts = [];
 
         $scope.page = 0;
@@ -24,9 +24,18 @@
                 }
             };
 
+            $scope.listCategories = [];
+            $scope.getListCategory = () => {
+                apiService.get('/api/Categories/get-all-categories', null, (result) => {
+                    $scope.listCategories = result.data;
+                }, () => {
+                    alert('Get all list categories failed');
+                });
+            };
+            $scope.getListCategory();
+
             apiService.get('/api/Posts/get-list-posts', config, (result) => {
                 $scope.listPosts = result.data.list;
-
                 $scope.page = result.data.page;
                 $scope.num = result.data.count;
                 $scope.pagesCount = result.data.pagesCount;
@@ -42,11 +51,23 @@
                     $scope.showEnd = false;
                 }
 
+             
             }, () => {
                 alert('Get list posts failed');
             });
         }
         $scope.getListPosts();
+
+        $scope.deletePost = (id) => {
+            $ngBootbox.confirm('Do you want to delete post with id = ' + id).then(() => {
+                apiService.delete('/api/Posts/delete-post/' + id, null, () => {
+                    notificationService.displaySuccess('Delete post successfully');
+                    $scope.getListPosts();
+                }, () => {
+                    notificationService.displayError('Delete post failed');
+                })
+            });
+        };
     };
 
 

@@ -12,5 +12,15 @@
                 templateUrl: '/App/Components/Posts/postListView.html',
                 controller: 'postListController'
             })
+            .state('post_add', {
+                url: '/post_add',
+                templateUrl: '/App/Components/Posts/postAddView.html',
+                controller: 'postAddController'
+            })
+            .state('post_edit', {
+                url: '/post_edit/:id',
+                templateUrl: '/App/Components/Posts/postEditView.html',
+                controller: 'postEditController'
+            })
     }
 })();
