@@ -11,7 +11,6 @@
                 showFrom: '@',
                 showEnd: '@',
                 page: '@',
-                num: '@',
                 pageSize: '@',
                 pagesCount: '@',
                 totalCount: '@',
@@ -25,7 +24,7 @@
                 '$scope', function ($scope) {
                     $scope.search = function (i) {
                         if ($scope.searchFunc) {
-                            $scope.searchFunc({ page: i });
+                            $scope.searchFunc({ page: i});
                         }
                     };
 
