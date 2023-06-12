@@ -4,6 +4,7 @@ using Blogger_Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blogger_Data.Migrations
 {
     [DbContext(typeof(BloggerDbContext))]
-    partial class BloggerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230608144903_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,7 +91,7 @@ namespace Blogger_Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("date");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -105,7 +107,7 @@ namespace Blogger_Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("date");
 
                     b.HasKey("ID");
 
