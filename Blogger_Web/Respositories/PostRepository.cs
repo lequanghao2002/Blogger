@@ -4,13 +4,14 @@ using Blogger_Web.Infrastructure.Core;
 using Blogger_Web.Models.PostsDTO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Microsoft.VisualBasic;
 using System.Linq;
 
 namespace Blogger_Web.Respositories
 {
     public interface IPostRepository
     {
-        public Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize);
+        public Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize, DateTime? dateFrom, DateTime? dateTo, int? classify, string? filter);
         public Task<GetPostByIdDTO> GetById(int id);
         public Task<CreatePostDTO> Create(CreatePostDTO createPostDTO);
         public Task<CreatePostDTO> Update(CreatePostDTO createPostDTO, int id);
@@ -24,9 +25,42 @@ namespace Blogger_Web.Respositories
         {
             _bloggerDbContext = bloggerDbContext;
         }
-        public async Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize)
+        public async Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize, DateTime? dateFrom, DateTime? dateTo, int? classify, string? filter)
         {
-            var listPostDomain = await _bloggerDbContext.Posts.Select(post => new GetPostDTO
+            var listAllPostDomain = _bloggerDbContext.Posts.AsQueryable();
+
+            #region Check date
+            if (dateFrom != null && dateTo != null)
+            {
+
+                listAllPostDomain = listAllPostDomain.Where(p => p.CreateDate >= dateFrom && p.CreateDate <= dateTo);
+
+            }
+            else if (dateFrom != null)
+            {
+                listAllPostDomain = listAllPostDomain.Where(p => p.CreateDate >= dateFrom);
+            }
+            else if (dateTo != null)
+            {
+                listAllPostDomain = listAllPostDomain.Where(p => p.CreateDate <= dateTo);
+            }
+            #endregion
+
+            #region Check classify
+            if (classify != null)
+            {
+                listAllPostDomain = listAllPostDomain.Where(p => p.Post_Categories.Any(pc => pc.CategoryID == classify));
+            }
+            #endregion
+
+            #region Check filter
+            if (filter != null)
+            {
+                listAllPostDomain = listAllPostDomain.Where(p => p.Title.Contains(filter));
+            }
+            #endregion
+
+            var listPostDomain = await listAllPostDomain.Select(post => new GetPostDTO
             {
                 ID = post.ID,
                 Title = post.Title,
@@ -48,7 +82,7 @@ namespace Blogger_Web.Respositories
                 List = listPostPagination,
                 Page = page,
                 TotalCount = totalCount,
-                PagesCount = (int)Math.Ceiling((decimal)totalCount / pageSize)
+                PagesCount = (int)Math.Ceiling((decimal)totalCount / pageSize),
             };
 
             return paginationSet;
@@ -86,6 +120,11 @@ namespace Blogger_Web.Respositories
                 Published = post.Published,
                 AccountID = post.AccountID,
                 ListCategoriesID = post.Post_Categories.Select(postCategory => postCategory.CategoryID),
+
+                CreateDate = post.CreateDate,
+                UpdateDate = post.UpdateDate,
+                AccountName = post.Account.FullName,
+                ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
             }).FirstOrDefaultAsync(post => post.ID == id);
 
             return postDomain;
@@ -94,7 +133,7 @@ namespace Blogger_Web.Respositories
         public async Task<CreatePostDTO> Create(CreatePostDTO createPostDTO)
         {
             // Kiểm tra ListCategoriesID có rỗng ko
-            if(createPostDTO.ListCategoriesID.Count() == 0)
+            if (createPostDTO.ListCategoriesID.Count() == 0)
             {
                 return null!;
             };
@@ -117,6 +156,7 @@ namespace Blogger_Web.Respositories
                 Image = createPostDTO.Image,
                 Published = createPostDTO.Published,
                 CreateDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
                 AccountID = createPostDTO.AccountID,
             };
             await _bloggerDbContext.Posts.AddAsync(createPostDomain);

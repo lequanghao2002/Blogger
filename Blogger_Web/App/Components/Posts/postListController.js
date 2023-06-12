@@ -13,6 +13,21 @@
         $scope.pagesCount = 0;
         $scope.totalCount = 0;
         $scope.num = 0;
+        
+        $scope.dateFrom;
+        $scope.dateTo;
+        $scope.classify;
+        $scope.filter;
+
+        $scope.listCategories = [];
+        $scope.getListCategory = () => {
+            apiService.get('/api/Categories/get-all-categories', null, (result) => {
+                $scope.listCategories = result.data;
+            }, () => {
+                alert('Get all list categories failed');
+            });
+        };
+        $scope.getListCategory();
 
         $scope.getListPosts = getListPosts;
         function getListPosts(page) {
@@ -20,19 +35,13 @@
             var config = {
                 params: {
                     page: page,
-                    pageSize: 6
+                    pageSize: $scope.pageSize,
+                    dateFrom: $scope.dateFrom,
+                    dateTo: $scope.dateTo,
+                    classify: $scope.classify,
+                    filter: $scope.filter
                 }
             };
-
-            $scope.listCategories = [];
-            $scope.getListCategory = () => {
-                apiService.get('/api/Categories/get-all-categories', null, (result) => {
-                    $scope.listCategories = result.data;
-                }, () => {
-                    alert('Get all list categories failed');
-                });
-            };
-            $scope.getListCategory();
 
             apiService.get('/api/Posts/get-list-posts', config, (result) => {
                 $scope.listPosts = result.data.list;
@@ -41,7 +50,12 @@
                 $scope.pagesCount = result.data.pagesCount;
                 $scope.totalCount = result.data.totalCount;
 
-                $scope.showTo = ($scope.page * $scope.pageSize + 1);
+                if ($scope.num == 0) {
+                    $scope.showTo = 0;
+                }
+                else {
+                    $scope.showTo = ($scope.page * $scope.pageSize + 1);
+                }
                 $scope.showFrom = ($scope.page * $scope.pageSize) + $scope.num;
 
                 if ($scope.showFrom % $scope.pageSize == 1) {

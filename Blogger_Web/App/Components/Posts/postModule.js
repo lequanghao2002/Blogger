@@ -22,5 +22,10 @@
                 templateUrl: '/App/Components/Posts/postEditView.html',
                 controller: 'postEditController'
             })
+            .state('post_detail', {
+                url: '/post_detail/:id',
+                templateUrl: '/App/Components/Posts/postDetailView.html',
+                controller: 'postDetailController'
+            })
     }
 })();

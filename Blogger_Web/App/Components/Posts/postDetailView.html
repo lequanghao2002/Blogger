@@ -1,0 +1,51 @@
+﻿<div class="card">
+    <div class="card-header">
+        <h3 class="card-title" style="font-size:30px">Posts Detail - ID: {{post.id}} - Name: {{post.accountName}}</h3>
+
+        <button type="button" class="btn btn-success float-right" ui-sref="post_list">Create</button>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <p>
+            <span>
+                <b>Create Date: </b>
+                {{post.createDate | date : 'dd/MM/yyyy hh:mm:ss' }}
+            </span>
+
+            <span class="float-right">
+                <b>Update Date: </b>
+                {{post.updateDate | date : 'dd/MM/yyyy hh:mm:ss' }}
+            </span>
+        </p>
+
+        <p><b>Title: </b>{{post.title}}</p>
+
+        <p>
+            <b>Categories: </b>
+            <span class="mr-2" ng-repeat="category in post.listCategoriesName">
+                {{category}},
+            </span>
+        </p>
+
+        <b>Image: </b>
+        <p>
+            <img src="{{post.image}}" alt="Alternate Text" style="width: 200px" />
+        </p>
+
+        <p>
+            <b>Published: </b>
+            <span ng-class="{'badge bg-gradient-green': post.published == true, 'badge bg-gradient-red': post.published == false}" style="font-size: 14px">{{post.published | statusFilter}}</span>
+        </p>
+
+        <b>Brief Content: </b>
+        <p>{{post.briefContent}}</p>
+
+        <b>Content: </b>
+        <p id="content"></p>
+
+    </div>
+
+</div>
+<!-- /.card-body -->
+
+

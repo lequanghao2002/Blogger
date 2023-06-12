@@ -17,11 +17,11 @@ namespace Blogger_Web.Api
 		}
 
 		[HttpGet("get-list-posts")]
-		public async Task<IActionResult> GetListPosts(int page = 0, int pageSize = 6)
+		public async Task<IActionResult> GetListPosts(int page = 0, int pageSize = 6, DateTime? dateFrom = null, DateTime? dateTo = null, int? classify = null, string? filter = null)
 		{
 			try
 			{
-				var listPostsPagination = await _postRepository.GetAll(page, pageSize);
+				var listPostsPagination = await _postRepository.GetAll(page, pageSize, dateFrom, dateTo, classify, filter);
 				return Ok(listPostsPagination);
 			}
 			catch

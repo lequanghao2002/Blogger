@@ -45,7 +45,7 @@
             <div class="form-group">
                 <label for="image">Image</label>
                 <div ng-show="post.image">
-                    <img src="{{post.image}}" class="w-25 h-25 d-block" />
+                    <img src="{{post.image}}" class="d-block" style="width: 200px" />
                 </div>
                 <input type="text" name="image" class="form-control mt-1" id="image" required ng-model="post.image">
                 <button type="button" class="btn btn-default mt-1" ng-model="post.image" ng-click="chooseImage()">Choose Image</button>
