@@ -1,0 +1,187 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blogger</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="~/Assets/Client/css/main.css" rel="stylesheet" />
+
+</head>
+<body ng-app="Blogger">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3" id="sidebar">
+                <div class="header-section section" id="header-section">
+                    <div class="widget Header" data-version="1" id="Header1">
+                        <div id="header-inner">
+                            <div class="titlewrapper">
+                                <h1 class="site-title">
+                                    <a class="logo" href="#">
+                                        Blogger
+                                    </a>
+                                </h1>
+                            </div>
+                            <h2 class="site-description">
+                                BTemplates, the best place for Blogger Templates
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- _____ _ _ _ _ | ____|__| (_) |_ | |__ ___ _ __ ___ | _| / _` | | __| | '_ \ / _ \ '__/ _ \ | |__| (_| | | |_ | | | | __/ | | __/ |_____\__,_|_|\__| |_| |_|\___|_| \___| Edit the code below using your own information. Happy blogging from BTemplates.com :) -->
+                <div class="sosial">
+                    <a class="fa fa-2x fa-facebook" href="#">
+                        <span class="sr-only">
+                            facebook
+                        </span>
+                    </a>
+                    <a class="fa fa-2x fa-twitter" href="#">
+                        <span class="sr-only">
+                            twitter
+                        </span>
+                    </a>
+                    <a class="fa fa-2x fa-github" href="#">
+                        <span class="sr-only">
+                            github
+                        </span>
+                    </a>
+                    <a class="fa fa-2x fa-google-plus" href="#">
+                        <span class="sr-only">
+                            google plus
+                        </span>
+                    </a>
+                </div>
+                <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+                    <span class="sr-only">
+                        Toggle navigation
+                    </span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <div class="menu-testing-menu-container" id="primary-menu">
+                        <div class="top-menutop section" id="top-menutop">
+                            <div class="widget PageList" data-version="1" id="PageList8">
+                                <div class="widget-content">
+                                    <ul class="menu">
+                                        <li id="currentpage">
+                                            <a href="https://rareti-btemplates.blogspot.com/">
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://rareti-btemplates.blogspot.com/p/about.html">
+                                                About
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://facebook.com/bloggertemplates">
+                                                Facebook
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.youtube.com/c/btemplates?sub_confirmation=1">
+                                                YouTube
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://twitter.com/btemplates">
+                                                Twitter
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://pinterest.com/btemplates">
+                                                Pinterest
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-left section" id="sidebar-left">
+                    <div class="widget Attribution" data-version="1" id="Attribution1">
+                        <div class="widget-content" style="text-align: center;">
+                            Powered by <a href="https://www.blogger.com" target="_blank">Blogger</a>.
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="header-holder">
+                <header class="clearfix">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-7 col-lg-offset-2 col-content" id="description">
+                        <h1 class="sr-only">
+                        </h1>
+                        <p class="siteintro sr-only"></p>
+                    </div>
+                    <div class="col-sm-12 col-md-3" id="nav-search">
+                        <div id="search-holder">
+                            <form action="https://rareti-btemplates.blogspot.com/search/" id="search-form" method="get" role="search">
+                                <input class="search-field" name="q" type="search" value="Search...">
+                            </form>
+                        </div>
+                        <button id="search-btn">
+                            <i class="fa fa-2x fa-search"></i>
+                        </button>
+                    </div>
+                </header>
+            </div>
+
+            @RenderBody()
+            
+        </div>
+    </div>
+    <div class="container-fluid" id="footer-holder">
+        <div class="row">
+            <footer>
+                <div class="col-sm-9 col-md-7 col-md-offset-3 col-lg-offset-3 col-content">
+                    <!-- Do not edit or remove credits without our permission: newbloggerthemes.com -->
+                    <p id="copy">
+                        Copyright ©
+                        <script type="text/javascript">
+                            var creditsyear = new Date(); document.write(creditsyear.getFullYear());</script>2023
+                        <a href="https://rareti-btemplates.blogspot.com/">
+                            Rareti
+                        </a>
+                        | Powered by
+                        <a href="//www.blogger.com/">
+                            Blogger
+                        </a>
+                        Created By:
+                        <a class="copyright" href="http://www.widiyanata.com/" title="widiyanata">
+                            Widiyanata
+                        </a>
+                        <br>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Assets/Admin/libs/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="~/Assets/Admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <!------------------------------ Begin embed Angularjs ------------------------------>
+
+</body>
+</html>
+

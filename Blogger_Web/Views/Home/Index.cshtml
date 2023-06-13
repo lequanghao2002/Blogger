@@ -1,0 +1,147 @@
+﻿@model Task<List<Blogger_Web.Models.PostsDTO.GetPostDTO>>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<div class="col-sm-12 col-md-9 col-md-offset-3 col-lg-6 col-lg-offset-3 col-content">
+
+    <div class="main-blog-section section" id="main-blog-section">
+        <div class="widget Blog" data-version="1" id="Blog1">
+            <div class="blog-posts hfeed">
+                <!--Can't find substitution for tag [defaultAdStart]-->
+
+                <div class="date-outer">
+
+                    <h2 class="date-header">
+                        <span>
+                            Monday, August 1, 2016
+                        </span>
+                    </h2>
+
+                    <div class="date-posts">
+                        @foreach(var post in await Model)
+                        {
+                            <div class="post-outer">
+                                <div class="article-holder">
+                                    <article class="post hentry">
+                                        <div class="post-header-line-1"></div>
+                                        <div class="post-body entry-content">
+                                            <h2 class="post-title entry-title">
+                                                <a href="">
+                                                    <b>@post.Title</b>
+                                                </a>
+                                            </h2>
+                                            <p class="post-date-author">
+                                                <i class="fa fa-calendar"></i>
+                                                &nbsp;&nbsp;
+                                                @post.CreateDate
+                                                &nbsp;&nbsp;
+                                                <i class="fa fa-user"></i>
+                                                &nbsp;&nbsp;
+
+                                                <a href="" rel="author" title="author profile">
+                                                    @post.AccountName
+                                                </a>
+                                            </p>
+                                            <hr>
+                                            <div id="summary7853317494304687200">
+                                                <img src="@post.Image" class="pbtthumbimg">
+                                                <div style="line-height:1.6;" >
+                                                    <p class="block-ellipsis" style="margin: 0">
+                                                        @post.BriefContent
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div style="float:left;padding-right:10px;margin-top:10px;">
+                                                <a class="morer" href="">
+                                                    Read More
+                                                </a>
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                        </div>
+                                        <div class="post-meta">
+                                            <p style="color: black">
+                                                <i class="fa fa-folder-open"></i>
+                                                &nbsp;&nbsp;
+                                                @foreach(var category in post.ListCategoriesName)
+                                                {
+                                                    <span style="color: black">@category /</span>
+                                                }
+                                                
+
+                                                @*<a href="https://rareti-btemplates.blogspot.com/search/label/Blogger" rel="tag">
+                                                    Blogger
+                                                </a>*@
+                                            </p>
+                                            <p>
+                                                <i class="fa fa-comment"></i>
+                                                &nbsp;&nbsp;
+                                                <a href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html#comment-form" onclick="">
+                                                    2
+                                                    Comments
+
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <div class="post-footer sr-only">
+                                            <div class="post-footer-line post-footer-line-1">
+                                                <span class="post-author vcard">
+                                                    <span class="fn">
+                                                        <a href="https://www.blogger.com/profile/11448038113626124391" rel="author" title="author profile">
+                                                            BTemplates
+                                                        </a>
+                                                    </span>
+                                                </span>
+                                                <span class="post-timestamp">
+                                                    at
+                                                    <a class="timestamp-link" href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html" rel="bookmark" title="permanent link">
+                                                        <abbr class="published" title="2016-08-01T16:05:00-07:00">
+                                                            4:05 PM
+                                                        </abbr>
+                                                    </a>
+                                                </span>
+                                                <span class="post-comment-link">
+                                                    <a class="comment-link" href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html#comment-form" onclick="">
+                                                        2
+                                                        comments
+                                                    </a>
+                                                </span>
+                                            </div>
+                                            <div class="post-footer-line post-footer-line-2">
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+
+                <!--Can't find substitution for tag [adEnd]-->
+            </div>
+            <div style="clear: both;"></div>
+            <div class="blog-pager" id="blog-pager">
+                <a class="home-link" href="https://rareti-btemplates.blogspot.com/">
+                    Home
+                </a>
+            </div>
+            <div class="clear"></div>
+            <div class="blog-feeds">
+                <div class="feed-links">
+                    Subscribe to:
+                    <a class="feed-link" href="https://rareti-btemplates.blogspot.com/feeds/posts/default" target="_blank" type="application/atom+xml">
+                        Posts
+                        (
+                        Atom
+                        )
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    Html.RenderPartial("SideBarRight");
+}
