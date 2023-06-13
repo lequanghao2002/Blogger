@@ -12,6 +12,7 @@ namespace Blogger_Web.Respositories
     public interface IPostRepository
     {
         public Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize, DateTime? dateFrom, DateTime? dateTo, int? classify, string? filter);
+        public PaginationSet2<GetPostDTO> GetAll(int? categoryId, int page, int pageSize);
         public Task<GetPostByIdDTO> GetById(int id);
         public Task<CreatePostDTO> Create(CreatePostDTO createPostDTO);
         public Task<CreatePostDTO> Update(CreatePostDTO createPostDTO, int id);
@@ -87,6 +88,46 @@ namespace Blogger_Web.Respositories
 
             return paginationSet;
         }
+
+        public PaginationSet2<GetPostDTO> GetAll(int? categoryId, int page, int pageSize)
+        {
+            var listAllPostDomain = _bloggerDbContext.Posts.AsQueryable();
+
+
+            if (categoryId != null)
+            {
+                listAllPostDomain = listAllPostDomain.Where(p => p.Post_Categories.Any(pc => pc.CategoryID == categoryId));
+            }
+
+            var listPostDomain = listAllPostDomain.Select(post => new GetPostDTO
+            {
+                ID = post.ID,
+                Title = post.Title,
+                BriefContent = post.BriefContent,
+                Content = post.Content,
+                Image = post.Image,
+                Published = post.Published,
+                CreateDate = post.CreateDate,
+                UpdateDate = post.UpdateDate,
+                AccountName = post.Account.FullName,
+                ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
+            }).OrderByDescending(post => post.CreateDate).Where(post => post.Published == true).ToList();
+
+            var totalCount = listPostDomain.Count();
+            var listPostPagination = listPostDomain.Skip((page - 1) * pageSize).Take(pageSize);
+
+            PaginationSet2<GetPostDTO> paginationSet = new PaginationSet2<GetPostDTO>()
+            {
+                List = listPostPagination,
+                Page = page,
+                MaxPage = 5,
+                TotalCount = totalCount,
+                PagesCount = (int)Math.Ceiling((decimal)totalCount / pageSize),
+            };
+
+            return paginationSet;
+        }
+
 
         public async Task<GetPostByIdDTO> GetById(int id)
         {
