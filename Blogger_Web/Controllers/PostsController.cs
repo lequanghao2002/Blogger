@@ -9,10 +9,14 @@ namespace Blogger_Web.Controllers
     public class PostsController : Controller
     {
         private readonly IPostRepository _postRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public PostsController(IPostRepository postRepository)
+
+        public PostsController(IPostRepository postRepository, ICategoryRepository categoryRepository)
         {
             _postRepository = postRepository;
+            _categoryRepository = categoryRepository;
+
         }
 
         public IActionResult Search(string keyword, int page = 1)
@@ -22,6 +26,8 @@ namespace Blogger_Web.Controllers
 
             ViewBag.keyword = keyword;
 
+            ViewBag.listAllCategories = _categoryRepository.GetAllNoAsync();
+
             return View(listPostByKeyword);
         }
 
@@ -30,7 +36,9 @@ namespace Blogger_Web.Controllers
             var postById = await _postRepository.GetById(id);
 
             ViewBag.listPostRelated = await _postRepository.GetAllByRelated(postById.ListCategoriesID.First());
-            
+
+            ViewBag.listAllCategories = _categoryRepository.GetAllNoAsync();
+
             return View(postById);
         }
 

@@ -1,12 +1,4 @@
-﻿@using Blogger_Web.Models.Categories;
-
-@model List<GetCategoryDTO>
-
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-<div class="col-sm-12 col-md-9 col-md-offset-3 col-lg-3 col-lg-offset-0" id="sidebar-rightedt">
+﻿<div class="col-sm-12 col-md-9 col-md-offset-3 col-lg-3 col-lg-offset-0" id="sidebar-rightedt">
     <div class="sidebar-right section" id="sidebar-right">
         <div class="widget PopularPosts" data-version="1" id="PopularPosts1">
             <h3>
@@ -50,19 +42,30 @@
         </div>
         <div class="widget Label" data-version="1" id="Label1">
             <h3>
-                Categories
+                Danh mục
             </h3>
             <div class="widget-content list-label-widget-content">
                 <ul>
-                    @foreach(var category in Model)
+                    @if (ViewBag.listAllCategories != null)
+                    {
+                        @foreach (var category in ViewBag.listAllCategories)
+                        {
+                            <li>
+                                <a dir="ltr" href="~/Home?categoryID=@category.ID">
+                                    @category.Name
+                                </a>
+                            </li>
+                        }
+                    }
+                    else
                     {
                         <li>
-                            <a dir="ltr" href="~/Home?categoryID=@category.ID">
-                                @category.Name
+                            <a dir="ltr" href="">
+                                Bug
                             </a>
                         </li>
                     }
-                    
+
                     
                 </ul>
                 <div class="clear"></div>

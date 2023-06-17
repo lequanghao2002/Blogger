@@ -15,24 +15,27 @@ namespace Blogger_Web.Controllers
             _postRepository = postRepository;
             _categoryRepository = categoryRepository;
         }
-        public IActionResult Index(int? categoryID, int page = 1)
+        public async Task<IActionResult> Index(int? categoryID, int page = 1)
         {
             var pageSize = 6;
             var listPost = _postRepository.GetAllByCategory(categoryID, page, pageSize);
 
-            if(categoryID != null)
+            if (categoryID != null)
             {
-                var getCategoryById = _categoryRepository.GetById((int)categoryID);
+                var getCategoryById = await _categoryRepository.GetById((int)categoryID);
 
                 ViewBag.Category = getCategoryById;
             }
+
+
+            ViewBag.listAllCategories = _categoryRepository.GetAllNoAsync();
 
             return View(listPost);
         }
 
         public IActionResult SideBarRight()
         {
-            //var listAllCategories = await _categoryRepository.GetAll();
+            
             return PartialView();
         }
 

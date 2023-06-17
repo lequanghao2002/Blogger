@@ -11,6 +11,7 @@ namespace Blogger_Web.Respositories
     {
         public Task<PaginationSet<GetCategoryDTO>> GetAll(int page, int pageSize);
         public Task<List<GetCategoryDTO>> GetAll();
+        public List<GetCategoryDTO> GetAllNoAsync();
         public Task<GetCategoryByIdDTO> GetById(int id);
         public Task<CreateCategoryDTO> Create(CreateCategoryDTO createCategoryDTO);
         public Task<CreateCategoryDTO> Update(CreateCategoryDTO createCategoryDTO, int id);
@@ -54,6 +55,17 @@ namespace Blogger_Web.Respositories
                 ID = category.ID,
                 Name = category.Name,
             }).ToListAsync();
+
+            return listCategoriesDomain;
+        }
+
+        public List<GetCategoryDTO> GetAllNoAsync()
+        {
+            var listCategoriesDomain = _bloggerDbContext.Categories.Select(category => new GetCategoryDTO()
+            {
+                ID = category.ID,
+                Name = category.Name,
+            }).ToList();
 
             return listCategoriesDomain;
         }

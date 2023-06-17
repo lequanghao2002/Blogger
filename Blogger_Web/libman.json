@@ -10,5 +10,6 @@
       "library": "elfinder@2.1.61",
       "destination": "Assets/Admin/libs/elfinder"
     }
+    
   ]
 }

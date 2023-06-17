@@ -9,16 +9,22 @@
     var categoryVB = @ViewBag.Category;
 }
 <div class="col-sm-12 col-md-9 col-md-offset-3 col-lg-6 col-lg-offset-3 col-content">
+    <div class="main-blog-section section" id="main-blog-section">
 
-    <div class="main-blog-section section" id="main-blog-section">      
+        @if(categoryVB != null)
+        {
+            <div class="row">
+                <p style="margin: 0 0 15px 15px; color: red; font-size: 25px;">
+                    <i>Danh mục: @categoryVB.Name (@Model.TotalCount bài viết)</i>
+                </p>
+            </div>
+        }
+
         <div class="widget Blog" data-version="1" id="Blog1">
             <div class="blog-posts hfeed">
                 <!--Can't find substitution for tag [defaultAdStart]-->
 
                 <div class="date-outer">
-
-                  
-
                     <div class="date-posts">
                         @foreach(var post in Model.List)
                         {
