@@ -17,8 +17,8 @@ namespace Blogger_Web.Controllers
         }
         public IActionResult Index(int? categoryID, int page = 1)
         {
-            var pageSize = 1;
-            var listPost = _postRepository.GetAll(categoryID, page, pageSize);
+            var pageSize = 6;
+            var listPost = _postRepository.GetAllByCategory(categoryID, page, pageSize);
 
             if(categoryID != null)
             {
@@ -32,7 +32,19 @@ namespace Blogger_Web.Controllers
 
         public IActionResult SideBarRight()
         {
+            //var listAllCategories = await _categoryRepository.GetAll();
             return PartialView();
+        }
+
+        public JsonResult GetListPostByTitle(string keyword)
+        {
+            var listPostByTitle = _postRepository.GetAllByTitle(keyword);
+
+            return Json(new
+            {
+                data = listPostByTitle,
+
+            });
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -13,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="~/Assets/Client/libs/jquery-ui/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
     <link href="~/Assets/Client/css/main.css" rel="stylesheet" />
 </head>
@@ -127,20 +128,20 @@
                         <p class="siteintro sr-only"></p>
                     </div>
                     <div class="col-sm-12 col-md-3" id="nav-search">
-                        <div id="search-holder">
-                            <form action="https://rareti-btemplates.blogspot.com/search/" id="search-form" method="get" role="search">
-                                <input class="search-field" name="q" type="search" value="Search...">
-                            </form>
-                        </div>
-                        <button id="search-btn">
-                            <i class="fa fa-2x fa-search"></i>
-                        </button>
+                        <form method="get" action="~/Posts/Search">
+                            <div class="row" style="display: flex">
+                                <input type="text" id="txtKeyword" class="search-field form-control" name="keyword" placeholder="Nhập từ khóa..." style="margin-bottom: 0; width:100%">
+                                <button type="submit" id="btnSearch">
+                                    <i class="fa fa-2x fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </header>
             </div>
 
             @RenderBody()
-            
+
         </div>
     </div>
     <div class="container-fluid" id="footer-holder">
@@ -170,17 +171,19 @@
         </div>
     </div>
 
-
-    <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="~/Assets/Admin/libs/jquery/jquery.min.js"></script>
+
+    <!-- jQuery - UI -->
+    <script src="~/Assets/Client/libs/jquery-ui/jquery-ui.js"></script>
 
     <!-- Bootstrap 4 -->
     <script src="~/Assets/Admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Common -->
+    <script src="~/Assets/Client/js/common.js"></script>
 
-    <!------------------------------ Begin embed Angularjs ------------------------------>
-
+    @RenderSection("script", required: false)
 </body>
 </html>
 

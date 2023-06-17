@@ -6,13 +6,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualBasic;
 using System.Linq;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace Blogger_Web.Respositories
 {
     public interface IPostRepository
     {
         public Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize, DateTime? dateFrom, DateTime? dateTo, int? classify, string? filter);
-        public PaginationSet2<GetPostDTO> GetAll(int? categoryId, int page, int pageSize);
+        public PaginationSet2<GetPostDTO> GetAllByCategory(int? categoryId, int page, int pageSize);
+        public PaginationSet2<GetPostDTO> GetAllByKeyword(string keyword, int page, int pageSize);
+        public List<string> GetAllByTitle(string keyword);
+        public Task<List<GetPostByIdDTO>> GetAllByRelated(int listIdCategory);
         public Task<GetPostByIdDTO> GetById(int id);
         public Task<CreatePostDTO> Create(CreatePostDTO createPostDTO);
         public Task<CreatePostDTO> Update(CreatePostDTO createPostDTO, int id);
@@ -89,7 +93,7 @@ namespace Blogger_Web.Respositories
             return paginationSet;
         }
 
-        public PaginationSet2<GetPostDTO> GetAll(int? categoryId, int page, int pageSize)
+        public PaginationSet2<GetPostDTO> GetAllByCategory(int? categoryId, int page, int pageSize)
         {
             var listAllPostDomain = _bloggerDbContext.Posts.AsQueryable();
 
@@ -127,7 +131,66 @@ namespace Blogger_Web.Respositories
 
             return paginationSet;
         }
+        public PaginationSet2<GetPostDTO> GetAllByKeyword(string keyword, int page, int pageSize)
+        {
+            var listAllPostByKeywordDomain = _bloggerDbContext.Posts.Select(post => new GetPostDTO
+            {
+                ID = post.ID,
+                Title = post.Title,
+                BriefContent = post.BriefContent,
+                Content = post.Content,
+                Image = post.Image,
+                Published = post.Published,
+                CreateDate = post.CreateDate,
+                UpdateDate = post.UpdateDate,
+                AccountName = post.Account.FullName,
+                ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
+            }).OrderByDescending(post => post.CreateDate).Where(post => post.Published == true && post.Title.Contains(keyword)).ToList();
 
+            var totalCount = listAllPostByKeywordDomain.Count();
+            var listPostPagination = listAllPostByKeywordDomain.Skip((page - 1) * pageSize).Take(pageSize);
+
+            PaginationSet2<GetPostDTO> paginationSet = new PaginationSet2<GetPostDTO>()
+            {
+                List = listPostPagination,
+                Page = page,
+                MaxPage = 5,
+                TotalCount = totalCount,
+                PagesCount = (int)Math.Ceiling((decimal)totalCount / pageSize),
+            };
+
+            return paginationSet;
+        }
+
+        public List<string> GetAllByTitle(string keyword)
+        {
+            var listPostDomain = _bloggerDbContext.Posts.Where(post => post.Published == true && post.Title.Contains(keyword)).Select(post => post.Title).ToList();
+
+            return listPostDomain;
+        }
+
+        public async Task<List<GetPostByIdDTO>> GetAllByRelated(int idCategory)
+        {
+
+            var listAllPostByRelated = await _bloggerDbContext.Posts.Select(post => new GetPostByIdDTO
+            {
+                ID = post.ID,
+                Title = post.Title,
+                BriefContent = post.BriefContent,
+                Content = post.Content,
+                Image = post.Image,
+                Published = post.Published,
+                AccountID = post.AccountID,
+                ListCategoriesID = post.Post_Categories.Select(postCategory => postCategory.CategoryID),
+
+                CreateDate = post.CreateDate,
+                UpdateDate = post.UpdateDate,
+                AccountName = post.Account.FullName,
+                ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
+            }).Where(p => p.ListCategoriesID.Any(p => p.Equals(idCategory))).Take(3).ToListAsync();
+
+            return listAllPostByRelated;
+        }
 
         public async Task<GetPostByIdDTO> GetById(int id)
         {
