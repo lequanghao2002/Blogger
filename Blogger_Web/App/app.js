@@ -5,7 +5,8 @@
         [
             'BloggerCommon',
             'BloggerCategory',
-            'BloggerPost'
+            'BloggerPost',
+            'BloggerRole',
         ]).config(config);
 
     // Hai inject này nằm trong ui-router

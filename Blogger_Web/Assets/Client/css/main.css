@@ -3328,7 +3328,6 @@ footer {
 
 #sidebar-right .widget h2, #sidebar-right .widget h3, #sidebar-right .widget h4, #sidebar .widget h2, #sidebar .widget h3, #sidebar .widget h4 {
     font-weight: 400;
-    font-size: 16px;
     margin: 0 0 15px
 }
 
@@ -3416,8 +3415,6 @@ footer {
 }
 
     #sidebar-right .widget {
-        padding: 15px;
-        border-bottom: 1px solid #e1e2e3;
         margin-bottom: 15px
     }
 

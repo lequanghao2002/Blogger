@@ -18,6 +18,7 @@ namespace Blogger_Web.Respositories
         public List<string> GetAllByTitle(string keyword);
         public Task<List<GetPostByIdDTO>> GetAllByRelated(int listIdCategory);
         public Task<GetPostByIdDTO> GetById(int id);
+        public Task<int> GetNew();
         public Task<CreatePostDTO> Create(CreatePostDTO createPostDTO);
         public Task<CreatePostDTO> Update(CreatePostDTO createPostDTO, int id);
         public Task<Post> Delete(int id);
@@ -194,26 +195,6 @@ namespace Blogger_Web.Respositories
 
         public async Task<GetPostByIdDTO> GetById(int id)
         {
-            //var postDomainById = await _bloggerDbContext.Posts.FirstOrDefaultAsync(post => post.ID == id);
-            //if (postDomainById != null)
-            //{
-            //    var post = new GetPostByIdDTO()
-            //    {
-            //        ID = postDomainById.ID,
-            //        Title = postDomainById.Title,
-            //        BriefContent = postDomainById.BriefContent,
-            //        Content = postDomainById.Content,
-            //        Image = postDomainById.Image,
-            //        Published = postDomainById.Published,
-            //        AccountID = postDomainById.AccountID,
-            //        ListCategoriesID = postDomainById.Post_Categories.Select(postCategory => postCategory.CategoryID),
-            //    };
-            //    return post;
-            //}
-            //else
-            //{
-            //    return null!;
-            //}
             var postDomain = await _bloggerDbContext.Posts.Select(post => new GetPostByIdDTO
             {
                 ID = post.ID,
@@ -234,6 +215,13 @@ namespace Blogger_Web.Respositories
             return postDomain;
         }
 
+        public async Task<int> GetNew()
+        {
+            var postNew = await _bloggerDbContext.Posts.OrderByDescending(p => p.ID).FirstAsync();
+
+            return postNew.ID;
+        }
+        
         public async Task<CreatePostDTO> Create(CreatePostDTO createPostDTO)
         {
             // Kiểm tra ListCategoriesID có rỗng ko

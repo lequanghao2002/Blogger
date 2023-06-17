@@ -1,4 +1,5 @@
-﻿using Blogger_Web.Models.Categories;
+﻿using Blogger_Common;
+using Blogger_Web.Models.Categories;
 using Blogger_Web.Models.PostsDTO;
 using Blogger_Web.Respositories;
 using Microsoft.AspNetCore.Http;
@@ -73,7 +74,24 @@ namespace Blogger_Web.Api
 			}
 		}
 
-		[HttpPut("update-post/{id}")]
+        [HttpGet("send-email")]
+        public async Task<IActionResult> SendEmail()
+        {
+            try
+            {
+				var idNew = await _postRepository.GetNew();
+
+                EmailService.SendMail("BlogIT", "Web BlogIT vừa đăng một bài viết mới", $"Vui lòng ấn link sau để xem chi tiết bài viết: https://localhost:7263/Posts/Detail?id={idNew} ", "nhochao1712@gmail.com");
+
+				return Ok("Gửi email thành công");
+            }
+            catch
+            {
+                return BadRequest("Gửi email không thành công");
+            }
+        }
+
+        [HttpPut("update-post/{id}")]
 		public async Task<IActionResult> UpdatePost(int id, CreatePostDTO createPostDTO)
 		{
 			try

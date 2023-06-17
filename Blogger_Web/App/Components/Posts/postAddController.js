@@ -42,7 +42,14 @@
 
             apiService.post('/api/Posts/create-post', $scope.post, (result) => {
                 notificationService.displaySuccess('Create post successfully');
-                $state.go('post_list')
+                $state.go('post_list');
+                
+
+                apiService.get('/api/Posts/send-email', null, (result) => {
+
+                }, (error) => {
+
+                });
             }, (error) => {
                 notificationService.displayError('Create post failed');
             });
