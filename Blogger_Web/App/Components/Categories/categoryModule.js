@@ -9,16 +9,19 @@
         $stateProvider
             .state('category_list', {
                 url: "/category_list",
+                parent: 'base',
                 templateUrl: '/app/Components/Categories/categoryListView.html',
                 controller: 'categoryListController'
             })
             .state('category_add', {
                 url: '/category_add',
+                parent: 'base',
                 templateUrl: '/app/components/categories/categoryAddView.html',
                 controller: 'categoryAddController'
             })
             .state('category_edit', {
                 url: '/category_edit/:id',
+                parent: 'base',
                 templateUrl: '/app/components/categories/categoryEditView.html',
                 controller: 'categoryEditController'
             })

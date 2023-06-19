@@ -24,7 +24,7 @@
             apiService.get('/api/Categories/get-all-categories', null, (result) => {
                 $scope.listCategories = result.data;
             }, () => {
-                alert('Get all list categories failed');
+                //alert('Get all list categories failed');
             });
         };
         $scope.getListCategory();
@@ -67,7 +67,7 @@
 
              
             }, () => {
-                alert('Get list posts failed');
+                //alert('Get list posts failed');
             });
         }
         $scope.getListPosts();

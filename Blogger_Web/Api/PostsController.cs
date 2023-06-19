@@ -2,6 +2,7 @@
 using Blogger_Web.Models.Categories;
 using Blogger_Web.Models.PostsDTO;
 using Blogger_Web.Respositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,8 @@ namespace Blogger_Web.Api
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class PostsController : ControllerBase
+    [Authorize]
+    public class PostsController : ControllerBase
 	{
 		private readonly IPostRepository _postRepository;
 

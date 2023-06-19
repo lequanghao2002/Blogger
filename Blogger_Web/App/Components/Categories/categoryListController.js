@@ -42,7 +42,7 @@
                     $scope.showEnd = false;
                 }
             }, () => {
-                alert('Get list categories failed');
+                //alert('Get list categories failed');
             });
         }
         $scope.getListCategories();

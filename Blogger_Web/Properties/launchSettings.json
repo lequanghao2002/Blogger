@@ -24,6 +24,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
+      //"launchUrl": "Admin",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,5 +1,6 @@
 ﻿using Blogger_Web.Models.Categories;
 using Blogger_Web.Respositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace Blogger_Web.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;

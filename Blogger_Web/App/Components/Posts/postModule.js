@@ -9,21 +9,25 @@
         $stateProvider
             .state('post_list', {
                 url: '/post_list',
+                parent: 'base',
                 templateUrl: '/App/Components/Posts/postListView.html',
                 controller: 'postListController'
             })
             .state('post_add', {
                 url: '/post_add',
+                parent: 'base',
                 templateUrl: '/App/Components/Posts/postAddView.html',
                 controller: 'postAddController'
             })
             .state('post_edit', {
                 url: '/post_edit/:id',
+                parent: 'base',
                 templateUrl: '/App/Components/Posts/postEditView.html',
                 controller: 'postEditController'
             })
             .state('post_detail', {
                 url: '/post_detail/:id',
+                parent: 'base',
                 templateUrl: '/App/Components/Posts/postDetailView.html',
                 controller: 'postDetailController'
             })

@@ -2,10 +2,13 @@
 using Blogger_Model;
 using Blogger_Web.Infrastructure.Core;
 using Blogger_Web.Models.PostsDTO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualBasic;
 using System.Linq;
+using System.Net;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace Blogger_Web.Respositories
@@ -76,7 +79,7 @@ namespace Blogger_Web.Respositories
                 Published = post.Published,
                 CreateDate = post.CreateDate,
                 UpdateDate = post.UpdateDate,
-                AccountName = post.Account.FullName,
+                AccountName = post.User.FullName,
                 ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
             }).OrderByDescending(post => post.CreateDate).ToListAsync();
 
@@ -114,7 +117,7 @@ namespace Blogger_Web.Respositories
                 Published = post.Published,
                 CreateDate = post.CreateDate,
                 UpdateDate = post.UpdateDate,
-                AccountName = post.Account.FullName,
+                AccountName = post.User.FullName,
                 ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
             }).OrderByDescending(post => post.CreateDate).Where(post => post.Published == true).ToList();
 
@@ -144,7 +147,7 @@ namespace Blogger_Web.Respositories
                 Published = post.Published,
                 CreateDate = post.CreateDate,
                 UpdateDate = post.UpdateDate,
-                AccountName = post.Account.FullName,
+                AccountName = post.User.FullName,
                 ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
             }).OrderByDescending(post => post.CreateDate).Where(post => post.Published == true && post.Title.Contains(keyword)).ToList();
 
@@ -181,12 +184,12 @@ namespace Blogger_Web.Respositories
                 Content = post.Content,
                 Image = post.Image,
                 Published = post.Published,
-                AccountID = post.AccountID,
+                UserID = post.UserID,
                 ListCategoriesID = post.Post_Categories.Select(postCategory => postCategory.CategoryID),
 
                 CreateDate = post.CreateDate,
                 UpdateDate = post.UpdateDate,
-                AccountName = post.Account.FullName,
+                AccountName = post.User.FullName,
                 ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
             }).Where(p => p.ListCategoriesID.Any(p => p.Equals(idCategory))).Take(3).ToListAsync();
 
@@ -203,12 +206,12 @@ namespace Blogger_Web.Respositories
                 Content = post.Content,
                 Image = post.Image,
                 Published = post.Published,
-                AccountID = post.AccountID,
+                UserID = post.UserID,
                 ListCategoriesID = post.Post_Categories.Select(postCategory => postCategory.CategoryID),
 
                 CreateDate = post.CreateDate,
                 UpdateDate = post.UpdateDate,
-                AccountName = post.Account.FullName,
+                AccountName = post.User.FullName,
                 ListCategoriesName = post.Post_Categories.Select(pc => pc.Category.Name).ToList(),
             }).FirstOrDefaultAsync(post => post.ID == id);
 
@@ -220,7 +223,7 @@ namespace Blogger_Web.Respositories
             var postNew = await _bloggerDbContext.Posts.OrderByDescending(p => p.ID).FirstAsync();
 
             return postNew.ID;
-        }
+        }    
         
         public async Task<CreatePostDTO> Create(CreatePostDTO createPostDTO)
         {
@@ -249,7 +252,7 @@ namespace Blogger_Web.Respositories
                 Published = createPostDTO.Published,
                 CreateDate = DateTime.Now,
                 UpdateDate = DateTime.Now,
-                AccountID = createPostDTO.AccountID,
+                UserID = createPostDTO.UserID,
             };
             await _bloggerDbContext.Posts.AddAsync(createPostDomain);
             await _bloggerDbContext.SaveChangesAsync();
@@ -296,7 +299,7 @@ namespace Blogger_Web.Respositories
                 updatePostDomain.Image = createPostDTO.Image;
                 updatePostDomain.Published = createPostDTO.Published;
                 updatePostDomain.UpdateDate = DateTime.Now;
-                updatePostDomain.AccountID = createPostDTO.AccountID;
+                updatePostDomain.UserID = createPostDTO.UserID;
 
                 await _bloggerDbContext.SaveChangesAsync();
 

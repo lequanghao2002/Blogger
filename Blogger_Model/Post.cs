@@ -34,9 +34,9 @@ namespace Blogger_Model
 
         [Column(TypeName = "datetime")]
         public DateTime UpdateDate { get; set; }
-        public int AccountID { get; set; }
-        [ForeignKey("AccountID")]
-        public Account Account { get; set; }
+        public string UserID { get; set; }
+        [ForeignKey("UserID")]
+        public User User { get; set; }
         public IEnumerable<Post_Category> Post_Categories { get; set; }
     }
 }

@@ -1,50 +1,11 @@
 ﻿<div class="col-sm-12 col-md-9 col-md-offset-3 col-lg-3 col-lg-offset-0" id="sidebar-rightedt">
     <div class="sidebar-right section" id="sidebar-right">
-        <div class="widget PopularPosts" data-version="1" id="PopularPosts1">
-            <h3>
-                Popular Posts
-            </h3>
-            <div class="widget-content popular-posts">
-                <ul>
-                    <li>
-                        <div class="item-thumbnail-only">
-                            <div class="item-thumbnail">
-                                <a href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html" target="_blank">
-                                    <img alt="" border="0" height="72" src="//3.bp.blogspot.com/-xUiI8Gt_QyM/VmgGaFQcp3I/AAAAAAAAIrY/pmC0lS28CWI/s72-c/btemplates-aquarium-by-francisco-oliveros.jpg" width="72">
-                                </a>
-                            </div>
-                            <div class="item-title">
-                                <a href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html">
-                                    Demo post with formatted elements and comments.
-                                </a>
-                            </div>
-                        </div>
-                        <div style="clear: both;"></div>
-                    </li>
-                    <li>
-                        <div class="item-thumbnail-only">
-                            <div class="item-thumbnail">
-                                <a href="https://rareti-btemplates.blogspot.com/2016/08/images-in-this-template.html" target="_blank">
-                                    <img alt="" border="0" height="72" src="//3.bp.blogspot.com/-NB5XuDN1Ez8/VmgswVBbFMI/AAAAAAAAIsc/FLz68dJe2cU/s72-c/btemplates-china-by-francisco-oliveros.jpg" width="72">
-                                </a>
-                            </div>
-                            <div class="item-title">
-                                <a href="https://rareti-btemplates.blogspot.com/2016/08/images-in-this-template.html">
-                                    Images in this template.
-                                </a>
-                            </div>
-                        </div>
-                        <div style="clear: both;"></div>
-                    </li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-        </div>
-        <div class="widget Label" data-version="1" id="Label1">
-            <h3>
+        <div class="widget Label" data-version="1" id="Label1" @*style="
+    border-bottom: 1px solid #e1e2e3; padding-bottom: 20px;"*@>
+            <h2>
                 Danh mục
-            </h3>
-            <div class="widget-content list-label-widget-content">
+            </h2>
+            
                 <ul>
                     @if (ViewBag.listAllCategories != null)
                     {
@@ -66,10 +27,71 @@
                         </li>
                     }
 
-                    
+
                 </ul>
                 <div class="clear"></div>
-            </div>
         </div>
+
+        
     </div>
+
+    <div style="display: inline-block; border-top: 1px solid #e1e2e3;
+    margin-top: 40px;">
+        <h2>
+            Theo dõi blog qua email
+        </h2>
+        <p>Nhập email để được thông báo mỗi khi blog có bài viết mới</p>
+            <form method="get" action="~/Home/Test">
+                <div class="" style="display: flex">
+                    <input type="text" id="txtKeyword" class="search-field form-control" name="keyword" placeholder="Nhập email..." style="margin-bottom: 0; width:100%">
+                    <button type="submit" id="btnSearch">
+                        Gửi
+                    </button>
+                </div>
+            </form>
+
+    </div>
+
+    
+    @*<div class="widget PopularPosts" data-version="1" id="PopularPosts1">
+    <h3>
+    Popular Posts
+    </h3>
+    <div class="widget-content popular-posts">
+    <ul>
+    <li>
+    <div class="item-thumbnail-only">
+    <div class="item-thumbnail">
+    <a href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html" target="_blank">
+    <img alt="" border="0" height="72" src="//3.bp.blogspot.com/-xUiI8Gt_QyM/VmgGaFQcp3I/AAAAAAAAIrY/pmC0lS28CWI/s72-c/btemplates-aquarium-by-francisco-oliveros.jpg" width="72">
+    </a>
+    </div>
+    <div class="item-title">
+    <a href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html">
+    Demo post with formatted elements and comments.
+    </a>
+    </div>
+    </div>
+    <div style="clear: both;"></div>
+    </li>
+    <li>
+    <div class="item-thumbnail-only">
+    <div class="item-thumbnail">
+    <a href="https://rareti-btemplates.blogspot.com/2016/08/images-in-this-template.html" target="_blank">
+    <img alt="" border="0" height="72" src="//3.bp.blogspot.com/-NB5XuDN1Ez8/VmgswVBbFMI/AAAAAAAAIsc/FLz68dJe2cU/s72-c/btemplates-china-by-francisco-oliveros.jpg" width="72">
+    </a>
+    </div>
+    <div class="item-title">
+    <a href="https://rareti-btemplates.blogspot.com/2016/08/images-in-this-template.html">
+    Images in this template.
+    </a>
+    </div>
+    </div>
+    <div style="clear: both;"></div>
+    </li>
+    </ul>
+    <div class="clear"></div>
+    </div>
+    </div>*@
+
 </div>

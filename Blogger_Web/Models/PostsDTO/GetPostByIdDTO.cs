@@ -10,7 +10,7 @@ namespace Blogger_Web.Models.PostsDTO
         public string Content { get; set; }
         public string Image { get; set; }
         public bool Published { get; set; }
-        public int AccountID { get; set; }
+        public string UserID { get; set; }
         public IEnumerable<int> ListCategoriesID { get; set; }
 
         public DateTime CreateDate { get; set; }

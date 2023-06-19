@@ -18,7 +18,7 @@ namespace Blogger_Web.Models.PostsDTO
 		[Required(ErrorMessage = "Vui lòng chọn ảnh")]
 		public string Image { get; set; }
 		public bool Published { get; set; }
-		public int AccountID { get; set; }
+		public string UserID { get; set; }
 		public IEnumerable<int> ListCategoriesID { get; set; }
-	}
+	} 
 }

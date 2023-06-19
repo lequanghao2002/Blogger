@@ -10,7 +10,7 @@
         $scope.post = {
             ListCategoriesID: [],
             Published: true,
-            AccountID: 1
+            UserID: "e1269ad1-2a5c-433c-8ad1-4542ad049cd1"
         };
 
         $scope.chooseImage = () => {
