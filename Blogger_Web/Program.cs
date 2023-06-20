@@ -1,8 +1,13 @@
 ﻿using Blogger_Data;
+using Blogger_Model;
 using Blogger_Web.Respositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -12,7 +17,6 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 
@@ -31,7 +35,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
-// register service authentication
+//register service authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
 {
     option.TokenValidationParameters = new TokenValidationParameters
@@ -49,12 +53,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+//// Register security to Cookie
+//builder.Services.AddAuthentication(
+//    CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+//    {
+//        option.LoginPath = "/Home/Login";
+//        option.Cookie.Name = "UniqueCookieName_" + Guid.NewGuid().ToString();
+//    });
+
+
 // config identity user
-builder.Services.AddIdentityCore<IdentityUser>()
+builder.Services.AddIdentityCore<User>()
     .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("BlogIT")
+    .AddTokenProvider<DataProtectorTokenProvider<User>>("BlogIT")
     .AddEntityFrameworkStores<BloggerDbContext>()
     .AddDefaultTokenProviders();
+
 
 // config password register
 builder.Services.Configure<IdentityOptions>(option =>
@@ -67,6 +81,8 @@ builder.Services.Configure<IdentityOptions>(option =>
     option.Password.RequiredLength = 6; // Số ký tự tối thiểu của password
     option.Password.RequiredUniqueChars = 1; // Số ký tự riêng biệt
 });
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -101,6 +117,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/UploadFiles"
 });
 
+app.UseSession();
 
 app.UseRouting();
 app.MapControllerRoute(
@@ -112,8 +129,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-
 
 app.Run();
 

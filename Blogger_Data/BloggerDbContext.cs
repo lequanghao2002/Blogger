@@ -14,8 +14,7 @@ namespace Blogger_Data
 {
     public class BloggerDbContext : IdentityDbContext
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly UserManager<IdentityRole> _roleManager;
+      
         public BloggerDbContext(DbContextOptions<BloggerDbContext> options) : base(options)
         {
 
@@ -43,32 +42,32 @@ namespace Blogger_Data
             }
 
             // Tạo phân quyền admin và user
-            //var adminRoleId = "25d9875c-878d-414e-8e6f-b4c28815f739";
-            //var userRoleId = "3195156e-ef20-4c3d-9406-7bc7e87fd6f6";
-            //var roles = new List<IdentityRole>
-            //{
-            //    new IdentityRole
-            //    {
-            //        Id = adminRoleId,
-            //        ConcurrencyStamp = adminRoleId,
-            //        Name = "Admin",
-            //        NormalizedName = "Admin".ToUpper(),
-            //    },
-            //    new IdentityRole
-            //     {
-            //        Id = userRoleId,
-            //        ConcurrencyStamp = userRoleId,
-            //        Name = "User",
-            //        NormalizedName = "User".ToUpper()
-            //     }
+            var adminRoleId = "25d9875c-878d-414e-8e6f-b4c28815f739";
+            var userRoleId = "3195156e-ef20-4c3d-9406-7bc7e87fd6f6";
+            var roles = new List<IdentityRole>
+            {
+                new IdentityRole
+                {
+                    Id = adminRoleId,
+                    ConcurrencyStamp = adminRoleId,
+                    Name = "Admin",
+                    NormalizedName = "Admin".ToUpper(),
+                },
+                new IdentityRole
+                 {
+                    Id = userRoleId,
+                    ConcurrencyStamp = userRoleId,
+                    Name = "User",
+                    NormalizedName = "User".ToUpper()
+                 }
 
-            //};
+            };
 
-            //modelBuilder.Entity<IdentityRole>().HasData(roles);
+            modelBuilder.Entity<IdentityRole>().HasData(roles);
 
-            
 
-            
+
+
         }
     }
 }

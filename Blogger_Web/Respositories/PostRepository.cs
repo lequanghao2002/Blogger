@@ -22,6 +22,7 @@ namespace Blogger_Web.Respositories
         public Task<List<GetPostByIdDTO>> GetAllByRelated(int listIdCategory);
         public Task<GetPostByIdDTO> GetById(int id);
         public Task<int> GetNew();
+        public Task<List<User>> GetAllUserSendEmail();
         public Task<CreatePostDTO> Create(CreatePostDTO createPostDTO);
         public Task<CreatePostDTO> Update(CreatePostDTO createPostDTO, int id);
         public Task<Post> Delete(int id);
@@ -29,10 +30,12 @@ namespace Blogger_Web.Respositories
     public class PostRepository : IPostRepository
     {
         private readonly BloggerDbContext _bloggerDbContext;
+        private readonly UserManager<User> _userManager;
 
-        public PostRepository(BloggerDbContext bloggerDbContext)
+        public PostRepository(BloggerDbContext bloggerDbContext, UserManager<User> userManager)
         {
             _bloggerDbContext = bloggerDbContext;
+            _userManager = userManager;
         }
         public async Task<PaginationSet<GetPostDTO>> GetAll(int page, int pageSize, DateTime? dateFrom, DateTime? dateTo, int? classify, string? filter)
         {
@@ -216,6 +219,13 @@ namespace Blogger_Web.Respositories
             }).FirstOrDefaultAsync(post => post.ID == id);
 
             return postDomain;
+        }
+
+        public async Task<List<User>> GetAllUserSendEmail()
+        {
+            var getAllUserSendEmail = await _userManager.Users.Where(u => u.SendEmail == true).ToListAsync();
+
+            return getAllUserSendEmail;
         }
 
         public async Task<int> GetNew()

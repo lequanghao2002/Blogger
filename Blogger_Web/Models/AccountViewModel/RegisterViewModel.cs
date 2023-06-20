@@ -6,7 +6,7 @@ namespace Blogger_Web.Models.AccountViewModel
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        [Required(ErrorMessage = "Vui lòng nhập họ và tên")]
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập email")]
@@ -16,5 +16,8 @@ namespace Blogger_Web.Models.AccountViewModel
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         [MinLength(6, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập lại mật khẩu")]
+        public string RePassword { get; set; }
     }
 }

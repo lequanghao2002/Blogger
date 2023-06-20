@@ -8,7 +8,7 @@ namespace Blogger_Web.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;

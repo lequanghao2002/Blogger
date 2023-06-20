@@ -9,7 +9,7 @@ namespace Blogger_Web.Models.AccountViewModel
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
-        [MinLength(6, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

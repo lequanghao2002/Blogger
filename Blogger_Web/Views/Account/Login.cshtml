@@ -22,14 +22,17 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>BlogIT</b></a>
+                <a href="../../index2.html" class="h1"><b>Blog IT</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Thông tin cá nhân</p>
+                <p class="login-box-msg">Đăng nhập</p>
 
-                <form action="../../index3.html" method="post">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name="Email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -37,7 +40,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="Password" class="form-control" placeholder="Mật khẩu">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -51,7 +54,7 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                </form>
+                }
 
                 <div class="social-auth-links text-center mt-2 mb-3">
                     <a href="#" class="btn btn-block btn-primary">
@@ -66,7 +69,7 @@
                 <a href="forgot-password.html">I forgot my password</a>
                 </p>*@
                 <p class="mb-0">
-                    <a href="register.html" class="text-center">Đăng ký</a>
+                    <a href="~/Account/Register" class="text-center">Đăng ký</a>
                 </p>
             </div>
             <!-- /.card-body -->

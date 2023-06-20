@@ -19,7 +19,7 @@ namespace Blogger_Web.Controllers
 
         }
 
-        public IActionResult Search(string keyword, int page = 1)
+        public IActionResult Search(string keyword, int page = 6)
         {
             var pageSize = 1;
             var listPostByKeyword = _postRepository.GetAllByKeyword(keyword, page, pageSize);

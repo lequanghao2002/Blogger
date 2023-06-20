@@ -1,4 +1,5 @@
-﻿using Blogger_Web.Models.AccountViewModel;
+﻿using Blogger_Model;
+using Blogger_Web.Models.AccountViewModel;
 using Blogger_Web.Respositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,9 @@ namespace Blogger_Web.Api
     [ApiController]
     public class UsersController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly ITokenRepository _tokenRepository;
-        public UsersController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
+        public UsersController(UserManager<User> userManager, ITokenRepository tokenRepository)
         {
             _userManager = userManager;
             _tokenRepository = tokenRepository;
@@ -19,24 +20,20 @@ namespace Blogger_Web.Api
 
         //[HttpPost]
         //[Route("register")]
-        //public async Task<IActionResult> Register([FromBody] RegisterViewModel registerVM)
+        //public async Task<IActionResult> Register([FromBody] RegisterViewModel registerViewModel)
         //{
         //    var identityUser = new IdentityUser
         //    {
-        //        UserName = registerVM.Username,
-        //        Email = registerVM.Username,
+        //        UserName = registerViewModel.Email,
+        //        Email = registerViewModel.Email,
         //    };
 
-        //    var identityResult = await _userManager.CreateAsync(identityUser, registerVM.Password);
+        //    var identityResult = await _userManager.CreateAsync(identityUser, registerViewModel.Password);
 
         //    if (identityResult.Succeeded)
         //    {
-        //        //add roles to this user
-        //        if (registerVM.Roles != null && registerVM.Roles.Any())
-        //        {
-
-        //            identityResult = await _userManager.AddToRolesAsync(identityUser, registerVM.Roles);
-        //        }
+                
+        //        identityResult = await _userManager.AddToRolesAsync(identityUser, new string[]);
 
         //        if (identityResult.Succeeded)
         //        {
@@ -65,7 +62,7 @@ namespace Blogger_Web.Api
                     //get roles for this user – lấy quyền của user từ database
 
                     var roles = await _userManager.GetRolesAsync(user);
-                    if (roles != null)
+                    if (roles != null && roles.Contains("Admin"))
                     {
                         //create token – tạo token cho user này
                         var jwtToken = _tokenRepository.CreateJWTToken(

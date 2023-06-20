@@ -24,13 +24,21 @@
                 </a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Đăng ký để sử dụng dịch vụ</p>
+                <p class="login-box-msg">Đăng ký</p>
 
 
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
                 {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+
+                    @if (ViewData["SuccessMsg"] != null) {
+                        <div class="alert alert-success">Chúc mừng bạn đã đăng ký thành công</div>
+                        <div>Vui lòng click <a href="~/Account/Login">vào đây</a> để đăng nhập</div>
+                    }
+
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Họ và tên">
+                        <input type="text" name="FullName" class="form-control" placeholder="Họ và tên">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -38,7 +46,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name="Email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -46,7 +54,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="Password" class="form-control" placeholder="Mật khẩu">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -54,7 +62,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password">
+                        <input type="password" name="RePassword" class="form-control" placeholder="Nhập lại mật khẩu">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -81,7 +89,7 @@
                     </a>
                 </div>
 
-                <a href="login.html" class="text-center">Quay lại trang đăng nhập</a>
+                <a href="~/Account/Login" class="text-center">Quay lại trang đăng nhập</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->

@@ -10,7 +10,8 @@ namespace Blogger_Web.Api
 {
 	[Route("api/[controller]")]
 	[ApiController]
-    [Authorize]
+    //[Authorize]
+    [Authorize(Roles = "Admin")]
     public class PostsController : ControllerBase
 	{
 		private readonly IPostRepository _postRepository;
@@ -81,9 +82,17 @@ namespace Blogger_Web.Api
         {
             try
             {
-				var idNew = await _postRepository.GetNew();
+				var listUserSendEmail = await _postRepository.GetAllUserSendEmail();
 
-                EmailService.SendMail("BlogIT", "Web BlogIT vừa đăng một bài viết mới", $"Vui lòng ấn link sau để xem chi tiết bài viết: https://localhost:7263/Posts/Detail?id={idNew} ", "nhochao1712@gmail.com");
+				if(listUserSendEmail != null)
+				{
+                    var idNew = await _postRepository.GetNew();
+
+                    foreach (var user in listUserSendEmail)
+					{
+                        EmailService.SendMail("Blog IT", "Web Blog IT vừa đăng một bài viết mới", $"Vui lòng click <a href=\"https://localhost:7263/Posts/Detail?id={idNew}\">vào đây</a> để xem chi tiết bài viết", user.Email);
+                    }
+				}
 
 				return Ok("Gửi email thành công");
             }

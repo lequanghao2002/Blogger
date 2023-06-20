@@ -14,6 +14,7 @@ namespace Blogger_Model
     {
         [Required]
         public string FullName { get; set; }
+        public bool SendEmail { get; set; }
 
         public IEnumerable<Post> Post { get; set; }
     }
