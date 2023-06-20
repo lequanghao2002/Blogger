@@ -92,9 +92,15 @@ namespace Blogger_Web.Api
 					{
                         EmailService.SendMail("Blog IT", "Web Blog IT vừa đăng một bài viết mới", $"Vui lòng click <a href=\"https://localhost:7263/Posts/Detail?id={idNew}\">vào đây</a> để xem chi tiết bài viết", user.Email);
                     }
-				}
 
-				return Ok("Gửi email thành công");
+                    return Ok("Gửi email thành công");
+                }
+				else
+				{
+                    return Ok("Không có email nào đăng ký để gửi");
+                }
+
+				
             }
             catch
             {
