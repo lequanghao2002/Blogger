@@ -16,6 +16,8 @@ namespace Blogger_Model
         public string FullName { get; set; }
         public bool SendEmail { get; set; }
 
-        public IEnumerable<Post> Post { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
+
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }

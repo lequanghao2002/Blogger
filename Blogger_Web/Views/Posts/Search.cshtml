@@ -1,10 +1,25 @@
-﻿@using Blogger_Web.Infrastructure.Core;
+﻿@using Blogger_Data;
+@using Blogger_Web.Infrastructure.Core;
 @using Blogger_Web.Models.PostsDTO;
+@using Blogger_Web.Respositories;
+@using Microsoft.EntityFrameworkCore;
 
 @model PaginationSet2<GetPostDTO>
 @{
     ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@{
+
+    DbContextOptions<BloggerDbContext> options;
+    string connectionString = "Data Source=LEQUANGHAO\\SQLEXPRESS;Initial Catalog=DB_Blogger; Integrated Security=True";
+    options = new DbContextOptionsBuilder<BloggerDbContext>()
+                .UseSqlServer(connectionString)
+                .Options;
+
+    BloggerDbContext bloggerDbContext = new BloggerDbContext(options);
+    ICommentRepository _commentRepository = new CommentRepository(bloggerDbContext);
 }
 
 <div class="col-sm-12 col-md-9 col-md-offset-3 col-lg-6 col-lg-offset-3 col-content">
@@ -83,14 +98,14 @@
                                             Blogger
                                             </a>*@
                                             </p>
-                                            <p>
+                                            <p style="color: black">
                                                 <i class="fa fa-comment"></i>
-                                                &nbsp;&nbsp;
-                                                <a href="https://rareti-btemplates.blogspot.com/2016/08/demo-post-with-formatted-elements-and.html#comment-form" onclick="">
-                                                    2
-                                                    Comments
+                                                &nbsp;
+                                                @{
+                                                    var SumComment = await _commentRepository.GetCountAll(post.ID);
 
-                                                </a>
+                                                    <span style="color: black">@SumComment Bình luận</span>
+                                                }
                                             </p>
                                         </div>
                                         <div class="post-footer sr-only">

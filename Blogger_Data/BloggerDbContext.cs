@@ -22,6 +22,7 @@ namespace Blogger_Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post_Category> Post_Categories { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override async void OnModelCreating(ModelBuilder modelBuilder)
         {

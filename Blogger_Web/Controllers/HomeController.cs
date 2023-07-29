@@ -11,11 +11,13 @@ namespace Blogger_Web.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ICommentRepository _commentRepository;
 
-        public HomeController(IPostRepository postRepository, ICategoryRepository categoryRepository) 
+        public HomeController(IPostRepository postRepository, ICategoryRepository categoryRepository, ICommentRepository commentRepository) 
         {
             _postRepository = postRepository;
             _categoryRepository = categoryRepository;
+            _commentRepository = commentRepository;
         }
         public async Task<IActionResult> Index(int? categoryID, int page = 1)
         {
@@ -29,9 +31,7 @@ namespace Blogger_Web.Controllers
                 ViewBag.Category = getCategoryById;
             }
 
-
             ViewBag.listAllCategories = _categoryRepository.GetAllNoAsync();
-
             return View(listPost);
         }
 

@@ -34,9 +34,9 @@
             return $("<li>")
                 .append("<div>" + item.label + "</div>")
                 .appendTo(ul);
-                //.append("<div>" + item.label + "<br>" + item.desc + "</div>")
+            //.append("<div>" + item.label + "<br>" + item.desc + "</div>")
         };
     }
-}
+};
 
 common.init();

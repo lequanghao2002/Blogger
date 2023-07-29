@@ -21,6 +21,7 @@
     <link href="~/Assets/Admin/libs/jqueryui/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
     <link href="~/Assets/Client/css/main.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="container-fluid">
@@ -160,7 +161,7 @@
 
         </div>
     </div>
-    <div class="container-fluid" id="footer-holder">
+    <div class="container-fluid" id="footer-holder" style="margin-top: 50px;">
         <div class="row">
             <footer>
                 <div class="col-sm-9 col-md-7 col-md-offset-3 col-lg-offset-3 col-content">
@@ -189,7 +190,7 @@
 
     <!-- jQuery -->
     <script src="~/Assets/Admin/libs/jquery/jquery.min.js"></script>
-
+    @*jquery.unobtrusive-ajax.min.js*@
     <!-- jQuery - UI -->
     <script src="~/Assets/Admin/libs/jqueryui/jquery-ui.js"></script>
 
@@ -199,7 +200,9 @@
     <!-- Common -->
     <script src="~/Assets/Client/js/common.js"></script>
 
-    @RenderSection("script", required: false)
+    <!-- Comment -->
+    <script src="~/Assets/Client/js/comment.js"></script>
+
 </body>
 </html>
 

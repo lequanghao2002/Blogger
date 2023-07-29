@@ -38,5 +38,6 @@ namespace Blogger_Model
         [ForeignKey("UserID")]
         public User User { get; set; }
         public IEnumerable<Post_Category> Post_Categories { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }
